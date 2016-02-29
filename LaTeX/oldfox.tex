@@ -1,0 +1,195 @@
+% ExCalCo.tex
+% Source file of Extending Calculating Compilers
+
+\documentclass {article}
+
+\title{Calculating compilers with the Bahr and Hutton method}
+\author{Marco Jones}
+\date{}
+
+\begin{document}
+\maketitle
+
+\newcommand{\BH}{Bahr and Hutton }
+
+\section{A summary of Calculating Correct Compilers (\BH, 2014)}
+\BH have developed a simple technique, which allows us to
+calculate a compiler and virtual machine for a given defined source language and its' evaluation function, 
+whilst guanteeing it's correctness by virtue of it's construction.\cite{bandh}
+Traditionally compilers are derived by %usual development of compilers, AST...
+
+However through the inductive process we discover and invent definitions
+of our compiler and virtual machine without needing consideration of an 
+abstract syntax tree.
+The result, is a pair functions,  "comp" and "exec",
+representing the compiler and virtual machine, respectively.
+
+Firstly this paper will start by summarising the \BH method,
+using the arithmetic language derivation as described in
+CCC [Section 2], as a guide. 
+
+Secondly, the language will be gradually extended
+by calculating new definitions of a similiar nature,
+and implementing them in Haskell.
+\footnote{Haskell provides curried function application
+		and explicit type declation which are
+		convinient for defining grammars,
+		as consequence, the code implementation closely
+		resembles our calculations}
+
+Finally I will conclude with comments on space and time complexity
+of the implementation, and further work.
+
+\section{The Bahr and Hutton method}
+
+Sections 2.1 - 2.4 of CCC describe repectively steps
+1 - 4 of the method, only to have steps 2 - 4 combined
+in section 2.5 \cite{bandh}[2.5 Combining the transformation steps],
+resulting in a much simpler 3 step process.
+Consequently the refined method may seem intuitive,
+but explaining in detail the \BH method is not the purpose
+of this dissertation. Thus we will use the refined method.
+
+\BH begin by defining a datatype $Expr$, which represents
+the syntax of the source language,
+a function which defines their semantics,
+and a Stack ''which corresponds to a stack of integers''
+\cite{bandh}[section 2.5, pg 9]
+
+\newcommand{\eval}{\emph{eval}}
+
+\begin{eqnarray*}
+	 eval &::& Expr \rightarrow Int \\ 
+	 eval (Val \, n) &=& n \\
+	 eval (Add \, x \, y) &=& eval \, x + eval \, y \\
+\end{eqnarray*}
+
+	\[ \textbf{type} \, Stack = [Int]\]
+
+These equations describes that $eval$ is a function that takes
+an expression of type $Expr$, and outputs and integer of type
+$Int$
+
+For comparison, this is similar to key words programming
+languages which are compiled into machine code and executed
+by the virtual machine.
+E.g $eval$ in our case, has a similar effect to 
+"return" in Python.
+
+expression~$e$, and a stack~$s$, as it's input, and output ~$s'$, where \(s' = e':s \) where $e'$ is the result of evaluating the expression and $:s$ means that $e'$ is pushed to the top of $s$.
+\footnote{':' (read as 'cons') in Haskell, is the list constructor operator, meaning our stack will be implemented as a list with values being appeneded to, and removed from the head of the list.}
+From this \emph{partial specification}
+\footnote{Partial specifications avoid the need to "predetermine implementation decisions", furthermore they give us freedom in our calculations to define auxillary functions} 
+
+We could define $\evals$ and then prove each definition by induction, however \BH take a bottom up approach  which uses \emph{constructive induction \cite{backhouse}} to instead calculate definitions 
+on the expression $x$, this means we will calculate new definitions via equational reasoning and the process of doing so will serve as it's own proof \cite{bandh}[page 14].
+Calculations end when there are no further definitions to apply, either the calculation has finished because we have satisfied our hypothesis or it has become stuck and we will need to use an \emph{auxillary} function to continue. 
+
+Induction on any expression begins with the simplest i.e the \emph{base} case,
+which for this language, will be when the expression is just a single integer, $Val n$.
+
+\newcommand{\pushs}{push_{S}}
+
+\begin{eqnarray*}
+	\evals & :: Expr \rightarrow Stack \rightarrow Stack \\
+		  & \evals (Val \, n) s \\
+	=	  & \{\mbox{specification(1)}\} \\
+		  & eval (Val \, n):s \\ 
+	=	  & \{\mbox{definition of eval}\} \\
+		  & n:s \\
+	=	  & \{\mbox{define $\pushs \, n \, s == n : s$}\} \\
+		  & \pushs \, n \, s \\
+\end{eqnarray*}
+
+From this calculation we can conclude that \( \evals (Val \, n) s = \pushs \, n \, s \)
+
+In the final step, \pushs is defined here not because we were stuck, in fact the calculation was finished, but rather \pushs will simply be a useful function in later calculations as it "captures the idea of pushing a number onto the stack" \cite{bandh}.
+
+
+Next the inductive case, $Add(x y)$
+
+\newcommand{\adds}{add_{S}}
+
+\begin{eqnarray*}
+	     & \evals (add \, x \, y) s \\
+	=    & \{\mbox{definition of $eval_S$}\} \\
+	     & eval (add \, x \, y):s	\\
+	=    & \{\mbox{define: $\adds \, n:m:s 
+			= (eval \, m + eval \, n): s$}\} \\
+	     & (eval \, x + eval \,y):s \\
+	=    & \{\mbox{induction hypothesis for $y$}\} \\
+	     & \adds(\evals \, y: (eval \, x:s)) \\
+	=    & \{\mbox{induction hypothesis for $x$}\} \\
+	     & \adds(\evals \, y: (\evals \, x \, s)) \\
+\end{eqnarray*}
+
+\( \adds \, n:m:s == (eval \, m + eval \, n): s \)
+Note how evaluation order has been maintained, allbeit subtely. $x$ is pushed onto the stack first as $x$ corresponds to $m$ in the above equation,
+the value of $eval m + eval n$ is unaffected because addition is commutative, however this is an important point that left to right pushes of arguments, corresponds to left to right evaluation for non-commutative operators.
+This is demonstrates how design decisions are still apparent even though the calculation process is inductive, because we can deifne our own funcitons to meet our requirements.
+Later we will see how our calculations hit dead ends unless we define new operations.
+
+In conclusion, \BH have calculated the following definitions:
+
+
+\subsection{Step 3 - transform into continuation passing style}
+\begin{quotation}
+	We seek to derive a more general evaluation function, $eval_{C}$, that takes a function from stacks to stacks (the continuation) as an additional argument, which is used to process the stack that results from evaluating the expression. More precisely, if we define a type for continuations
+\end{quotation}
+	
+\[ \textbf{type} \; Cont = Stack \rightarrow Stack \] 
+
+then we seek to derive a function
+
+\newcommand{\evalc}{eval_{C}}
+
+	\[ \evalc :: Expr \rightarrow Cont \rightarrow Cont \]
+
+such that:
+
+\newtheorem{bhspec2}[bhspecs]{Specification}
+
+\begin{bhspec2}
+	\[ \evalc \, x \, c \, s = c \; (\evals x \, s) \] 
+\end{bhspec2}
+
+The base case is very simple here.
+Recalling the definition we found in the previous section:
+\( \evals (Val \, n) s = \pushs \, n \, s\)
+
+
+
+
+
+\begin{eqnarray*}{cl}
+		  & \evalc (Add x y) c s \\
+	=	  & \{\mbox{specification 2}\} \\
+		  & c (\evals (\adds) s) \\
+	=	  & \{\mbox{definition of $\evals$}\} \\
+		  & c (\adds (\evals y (\evals x \, s))) \\
+	=	  & \{\mbox{function composition}\} \\
+	= 	  & \evalc \, x (\evalc \, y (c \, o \, \adds)) s
+\end{eqnarray*}
+
+\section{Extending the compilers}
+
+From now on this dissertation will be about using the \BH method to calculate a compiler
+with definitions not defined in CCC.
+
+To begin with 4.1
+
+\subsection{Conditionals}
+
+
+
+
+
+
+
+
+
+
+
+\bibliographystyle{IEEEtran}
+\bibliography{calcob}
+\end{document}

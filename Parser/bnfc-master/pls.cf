@@ -1,0 +1,18 @@
+-- Lexer definitions
+-- Usually empty, unless you want better error messages
+-- from user-written analysis code, or special structures
+
+-- token Domain (letter | digit)+ ('.' (letter | digit)+)* ; -- domain names, eg york.ac.uk
+
+-- grammar, written as Labelled BNF
+-- I recommend keeping it simple, with one production per line:
+-- `Label"." Class[Level] "::=" BNF_body ";"'
+
+
+Add. Expr  ::= Expr "+" Expr1 ;
+Mul. Expr1 ::= Expr1 "*" Expr2 ;
+Ite. Expr2 ::= "if" Expr "then" Expr "else" Expr "fi" ;
+Val. Expr2 ::= Integer      ;
+Let. Expr2 ::= "Let" String "=" Expr "in" Expr "teL;
+-- Dom. Expr2 ::= "ping" Domain ;
+coercions Expr 2 ;
