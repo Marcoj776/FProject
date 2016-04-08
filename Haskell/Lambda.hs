@@ -5,7 +5,7 @@ data Exp  =  Var Char | Lam Char Exp | App Exp Exp
              deriving (Show)
 
 instance Serial Exp where
-  series  =  {- cons1 Var -} const (drawnFrom [Var 'x', Var 'y']) \/ cons2 Lam \/ cons2 App
+  series  = {-cons1 Var-} const (drawnFrom [Var 'x', Var 'y']) \/ cons2 Lam \/ cons2 App
 
 -- possible variation instead of cons1 Var
 -- const (drawnFrom [Var 'x', Var 'y'])
@@ -26,8 +26,8 @@ vars (App e1 e2)  =  vars e1 `union` vars e2
 prop_freeSubVars :: Exp -> Bool
 prop_freeSubVars e  =  wff e ==> (free e `subset` vars e)
   where
-  xs `subset` ys  =  null (xs \\ ys)
+  xs `subset` ys  =  null (xs \\ ys) --null tests whether list is empty
 
 wff :: Exp -> Bool
-wff (Var v) = True
-wff (Lam v e) = True
+wff e = True--if vars e 
+--wff (App e1 e2) = wff e1 && wff e2

@@ -12,7 +12,7 @@ eval               ::  Expr -> Env -> Int
 eval (Val n) bs     =   n
 eval (Add x y) bs   =   eval x bs + eval y bs
 eval (Ite x y z) bs =   if eval x bs /= 0 then eval y bs else eval z bs
-eval (Lte x y z) bs =   if eval x bs /= 0 then eval y bs else eval z bs
+eval (Lite x y z)   =   if eval x /= 0 then eval y else eval z
 eval (Let (Var v) x y) bs =   eval y ((v, eval x bs):bs)
 eval (Var v) bs     =   valueOf v bs
 
@@ -23,7 +23,7 @@ valueOf s ((v, n):bs) = if s == v then n else valueOf s bs
 --
 
 data Code             =   HALT | PUSH Int Code | ADD Code |
-						  ITE Code | LTE Code Code	|
+						  ITE Code | LITE Code Code	|
 						  LET Code | VAR Int Code
 
 comp 	              ::  Expr  -> Code
@@ -33,7 +33,7 @@ comp'                 ::  Expr -> Code -> Code
 comp' (Val n) c       =   PUSH n c
 comp' (Add x y) c     =   comp' x (comp' y (ADD c))
 comp' (Ite x y z) c   =   comp' z (comp' y  (comp' x (ITE c)))
-comp' (Lte x y z) c   =   comp' x (LTE (comp' y  c) (comp' z  c))
+comp' (Lite x y z) c   =   comp' x (LTE (comp' y c) (comp' z c))
 --comp' (Let v x y) cxt c   =   comp' x (v:cxt) c
 --comp' (Var v) cxt c       =   VAR (posOf v cxt) c
 
@@ -48,7 +48,7 @@ exec HALT s             =   s
 exec (PUSH n c) s       =   exec c (n:s) 
 exec (ADD c) (m:n:s)    =   exec c ((n+m) : s) 
 exec (ITE c) (k:m:n:s)  =   exec c ((if k /= 0 then m else n) : s)
-exec (LTE ct ce) (k:s)  =   exec (if k /= 0 then ct else ce) s
+exec (LITE ct ce) (k:s)=   exec (if k /= 0 then ct else ce) s
 --exec (LET c) (m:n:s)    =   exec
 exec (VAR n c) s        =   exec c (s!!n:s)
 

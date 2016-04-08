@@ -9,8 +9,7 @@ data Expr = Val Int |
 			Lte Expr Expr |
 			Ite Expr Expr Expr |
 			Lite Expr Expr Expr |
-			Let String Expr Expr | Var String |
-			Def String 
+			Let String Expr Expr | Var String
 			deriving (Eq, Show, Read)
 --make first argument of Let a String, requires a lot of refactoring
 			
@@ -31,7 +30,6 @@ valueOf s ((v, n):bs) = if s == v then n else valueOf s bs
 --
 
 data Code             =   HALT | PUSH Int Code | ADD Code |
-						  GTE Code | LTE Code |
 						  ITE Code | LITE Code Code	|
 						  LET Code | VAR Int Code | TEL Code
 						  deriving (Eq, Show, Read)
@@ -45,19 +43,14 @@ comp'                 ::  Expr -> Context -> Code -> Code
 
 comp' (Val n) cxt c       =   PUSH n c
 comp' (Add x y) cxt c     =   comp' x cxt (comp' y cxt (ADD c))
---
-comp' (Gte x y) cxt c     =   comp' y cxt (comp' x cxt (GTE c))
-comp' (Lte x y) cxt c     =   comp' y cxt (comp' x cxt (LTE c))
---
 comp' (Ite x y z) cxt c   =   comp' z cxt (comp' y  cxt (comp' x cxt (ITE c)))
 comp' (Lite x y z) cxt c  =   comp' x cxt (LITE (comp' y cxt c) (comp' z cxt c))
---
 comp' (Let v x y) cxt c   =   comp' x cxt (LET (comp' y (v:cxt) (TEL c)))
 comp' (Var v) cxt c       =   VAR (posOf v cxt) c
 
---Auxillary function for retrieving position of a Var from the context stack
+--Auxillary function for retrieving position of a Var in context stack
 posOf :: String -> Context -> Int
-posOf s [] = error "Var out of context"
+posOf s [] = error "No position in []"
 posOf s (v:vs) = if s == v then 0 else 1 + posOf s vs
 --
 
@@ -67,22 +60,16 @@ exec                         ::  Code -> Memory -> Memory
 exec  HALT m                   =   m
 exec (PUSH n c) ( s, vs)       =   exec c ((n:s), vs)
 exec (ADD c) 	((m:n:s), vs)  =   exec c (((n+m) : s), vs)
---
-exec (GTE c)    ((m:n:s), vs)  =   exec c (((if m > n then 1 else 0) : s), vs)
-exec (LTE c)    ((m:n:s), vs)  =   exec c (((if m < n then 1 else 0) : s), vs)
---
 exec (ITE c)    ((k:m:n:s), vs)=   exec c (((if k /= 0 then m else n) : s), vs)
 exec (LITE ct ce)((k:s), vs)   =   exec (if k /= 0 then ct else ce) (s, vs)
---
 exec (LET c)    ((n:s), vs)    =   exec c (s, n:vs)
 exec (TEL c) 	( s, n:vs)     =   exec c (s, vs)
 exec (VAR n c)  ( s, vs)       =   exec c (((vs!!n):s), vs) -- put value of n on top of s
---
 
 ----TESTS-----
 ift = exec (comp(Ite (Val 1)(Add (Val 1) (Val 0))(Add (Val 1) (Val 1))))([],[])
 iff = exec (comp(Ite (Val 0)(Add (Val 1) (Val 0))(Add (Val 1) (Val 1))))([],[])
-lift = comp(Lite (Val 1) (Add (Val 1) (Val 0)) (Add (Val 1) (Val 1)))
+lift = exec (comp(Lite (Val 1) (Add (Val 1) (Val 0)) (Add (Val 1) (Val 1)))) ([],[])
 liff = exec (comp(Lite (Val 0) (Add (Val 1) (Val 0)) (Add (Val 1) (Val 1))))	([],[])
 -- [1][2][1][2] as expected
 evff = eval (Let "x" (Val 1)
