@@ -1,9 +1,8 @@
-module Arith where
+module Arithandtest where
+import LazySmallCheck
 
 type Stack = [Int]
 type Env = [(String, Int)]
-type Args = [String]
-type Funcs = [(String, Args)]
 
 data Expr = Val Int | 
 			Add Expr Expr |
@@ -12,8 +11,7 @@ data Expr = Val Int |
 			Ite Expr Expr Expr |
 			Lite Expr Expr Expr |
 			Let String Expr Expr | Var String |
-			Def String String Expr Expr |
-			Fun String Args
+			Def String 
 			deriving (Eq, Show, Read)
 --make first argument of Let a String, requires a lot of refactoring
 			
@@ -26,6 +24,8 @@ eval (Ite x y z) bs		=   if eval x bs /= 0 then eval y bs else eval z bs
 eval (Lite x y z) bs 	=   if eval x bs /= 0 then eval y bs else eval z bs
 eval (Let v x y) bs		=   eval y ((v, eval x bs):bs)
 eval (Var v) bs		    =   valueOf v bs
+
+(eval e ([],[])) == exec (comp e ([],[]))
 
 --Auxillary function for retrieving value of a Var
 valueOf :: String -> Env -> Int
@@ -83,22 +83,6 @@ exec (VAR n c)  ( s, vs)       =   exec c (((vs!!n):s), vs) -- put value of n on
 --
 
 ----TESTS-----
-ift = exec (comp(Ite (Val 1)(Add (Val 1) (Val 0))(Add (Val 1) (Val 1))))([],[])
-iff = exec (comp(Ite (Val 0)(Add (Val 1) (Val 0))(Add (Val 1) (Val 1))))([],[])
-lift = comp(Lite (Val 1) (Add (Val 1) (Val 0)) (Add (Val 1) (Val 1)))
-liteexpr = Lite (Val 0) (Add (Val 1) (Val 0)) (Add (Val 1) (Val 1))
-liff = exec (comp liteexpr)([],[])
--- [1][2][1][2] as expected
-evff = eval (Let "x" (Val 1)
-				(Add (Var "y") (Val 2))) []
-evvl = eval (Let "x" (Let "b" (Val 2) 
-						(Add (Var "b") (Val 2)))
-				(Let "y" (Var "x") 
-					(Add (Var "y") (Val 2)))) []
-evffl = eval (Let "x" (Val 1) 
-				(Let "y" (Var "x") 
-					(Add (Var "Z") (Val 2)))) []
-
 --Enforces correctness of induction hypithesis
 calc :: String -> Expr -> Expr -> Context -> Code -> Memory -> [Memory]
 calc v x y cxt c (s,vs) =
@@ -122,7 +106,31 @@ posv = comp' (Var "v") ["v"] (comp' (Var "x") ["v", "y", "x"] HALT)
 tel = comp (Let "v" (Val 1) (Add (Val 2) (Var "v")))
 
 
+instance Serial Expr where
+  series  =  const (drawnFrom [Val 1, Val 2]) \/
+				cons2 Add \/
+				cons2 Gte \/ cons2 Lte \/
+				cons3 Ite \/ 
+				cons3 Lite \/ 
+				const (drawnFrom [Var "x", Var "y"]) \/
+				cons3 Let
 
+wellScoped :: Expr -> Bool
+wellScoped e  =  wellScopedIn [] e
+
+wellScopedIn :: [String] -> Expr -> Bool
+wellScopedIn _ (Val _)  =  True
+wellScopedIn cxt (Add e1 e2)  =  wellScopedIn cxt e1 && wellScopedIn cxt e2
+wellScopedIn cxt (Gte e1 e2) = wellScopedIn cxt e1 && wellScopedIn cxt e2
+wellScopedIn cxt (Lte e1 e2) = wellScopedIn cxt e1 && wellScopedIn cxt e2
+wellScopedIn cxt (Ite e1 e2 e3) = wellScopedIn cxt e1 && wellScopedIn cxt e2 && wellScopedIn cxt e3
+wellScopedIn cxt (Lite e1 e2 e3) = wellScopedIn cxt e1 && wellScopedIn cxt e2 && wellScopedIn cxt e3
+wellScopedIn cxt (Let e1 e2 e3) = wellScopedIn (e1:cxt) e2 && wellScopedIn (e1:cxt) e3
+wellScopedIn (v:cxt) (Var e) = if e == v then True else wellScopedIn cxt (Var e)
+
+
+prop_evalCompExec :: Expr -> Bool
+prop_evalCompExec e  =  wellScoped e ==> (eval e ([],[])) == exec (comp e ([],[]))
 
 
 

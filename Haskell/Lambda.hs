@@ -1,3 +1,4 @@
+module Lambda where
 import LazySmallCheck
 import Data.List ((\\), union)
 
@@ -29,5 +30,10 @@ prop_freeSubVars e  =  wff e ==> (free e `subset` vars e)
   xs `subset` ys  =  null (xs \\ ys) --null tests whether list is empty
 
 wff :: Exp -> Bool
-wff e = True--if vars e 
---wff (App e1 e2) = wff e1 && wff e2
+wff (Var v) = True
+wff (Lam v e) = wff e 
+wff (App e1 e2) = wff e1 && wff e2
+
+--the test that I'm asking about, that I put into GHCI is
+-- test wff
+-- test prop_freeSubVars

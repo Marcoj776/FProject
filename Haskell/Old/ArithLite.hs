@@ -3,7 +3,8 @@ module Arith where
 data Expr = Val Int | 
 			Add Expr Expr |
 			Ite Expr Expr Expr |
-			Lte Expr Expr Expr 
+			Lite Expr Expr Expr 
+			deriving (Eq, Show, Read)
 
 eval            ::  Expr -> Int
 eval (Val n)     =   n
@@ -12,16 +13,24 @@ eval (Ite x y z) =   if eval x /= 0 then eval y else eval z
 eval (Lite x y z) =   if eval x /= 0 then eval y else eval z
 
 data Code             =   HALT | PUSH Int Code | ADD Code |
-						  ITE Code | LITE Code Code	
+						  ITE Code | LITE Code Code
+						  deriving (Eq, Show, Read)
 
 comp 	              ::  Expr -> Code
 comp e                =   comp' e HALT
+
+{-
+komp e :: Expr -> Code
+komp (Val n) c
+-}
+
+crashtest = comp' (Val 1)((LITE (comp (Val 1))(comp(Val 1))))
 
 comp'                 ::  Expr -> Code -> Code
 comp' (Val n) c       =   PUSH n c
 comp' (Add x y) c     =   comp' x (comp' y (ADD c))
 comp' (Ite x y z) c   =   comp' z (comp' y (comp' x (ITE c)))
-comp' (Lite x y z) c   =   comp' x (LTE (comp' y c) (comp' z c))
+comp' (Lite x y z) c   =   comp' x (LITE (comp' y c) (comp' z c))
 
 
 type Stack = [Int]
@@ -35,12 +44,20 @@ exec (LITE ct ce) (k:s)=   exec (if k /= 0 then ct else ce) s
 
 
 ----TESTS-----
-ift = exec (comp'(Ite (Val 1) (Add (Val 1) (Val 0)) (Add (Val 1) (Val 1))) HALT) []
-iff = exec (comp'(Ite (Val 0) (Add (Val 1) (Val 0)) (Add (Val 1) (Val 1))) HALT) []
-lift = exec (comp'(Ite (Val 1) (Add (Val 1) (Val 0)) (Add (Val 1) (Val 1))) HALT) [] 
-liff = exec (comp'(Ite (Val 0) (Add (Val 1) (Val 0)) (Add (Val 1) (Val 1))) HALT) [] 
-lliff = exec (comp'(Lite (Val 1) (Add (Val 1) (Add (Val 1) (Add (Val 1) (Val 0)))) (Add (Val 1) (Val 1))) HALT) []
--- [1][2][1][2] as expected
+lite1 = comp (Lite (Val 1) (Add (Val 2)(Val 3)) (Add (Val 4)(Val 5)))
+--	PUSH 1 (LITE (PUSH 2 (PUSH 3 (ADD HALT))) (PUSH 4 (PUSH 5 (ADD HALT))))
+lite2 = exec(comp (Lite (Val 1) (Add (Val 2)(Val 3)) (Add (Val 4)(Val 5)))) []
+--[5]
+lite3 =  eval (Ite (Val 1) (Add(Val 2)(Val 3)) (Add(Val 4)(Val 5)))
+--5
+
+lite4 = comp (Lite (Val 0) (Add (Val 2)(Val 3)) (Add (Val 4)(Val 5)))
+--	PUSH 0 (LITE (PUSH 2 (PUSH 3 (ADD HALT))) (PUSH 4 (PUSH 5 (ADD HALT))))
+lite5 = exec(comp (Lite (Val 0) (Add (Val 2)(Val 3)) (Add (Val 4)(Val 5)))) []
+--[5]
+lite6 =  eval (Ite (Val 0) (Add(Val 2)(Val 3)) (Add(Val 4)(Val 5)))
+--5
+
 
 
 

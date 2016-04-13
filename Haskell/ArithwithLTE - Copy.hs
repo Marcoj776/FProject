@@ -86,8 +86,7 @@ exec (VAR n c)  ( s, vs)       =   exec c (((vs!!n):s), vs) -- put value of n on
 ift = exec (comp(Ite (Val 1)(Add (Val 1) (Val 0))(Add (Val 1) (Val 1))))([],[])
 iff = exec (comp(Ite (Val 0)(Add (Val 1) (Val 0))(Add (Val 1) (Val 1))))([],[])
 lift = comp(Lite (Val 1) (Add (Val 1) (Val 0)) (Add (Val 1) (Val 1)))
-liteexpr = Lite (Val 0) (Add (Val 1) (Val 0)) (Add (Val 1) (Val 1))
-liff = exec (comp liteexpr)([],[])
+liff = exec (comp(Lite (Val 0) (Add (Val 1) (Val 0)) (Add (Val 1) (Val 1))))	([],[])
 -- [1][2][1][2] as expected
 evff = eval (Let "x" (Val 1)
 				(Add (Var "y") (Val 2))) []
