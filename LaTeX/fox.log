@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.3.29)  13 APR 2016 15:41
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.3.29)  16 APR 2016 01:53
 entering extended mode
-**C:/Users/Marco/CompSci/FinalProject/LaTeX/fox.tex
-(C:/Users/Marco/CompSci/FinalProject/LaTeX/fox.tex
+**fox.tex
+(fox.tex
 LaTeX2e <2014/05/01>
 Babel <3.9l> and hyphenation patterns for 68 languages loaded.
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\article.cls"
@@ -78,111 +78,108 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 567.
 \mathdisplay@stack=\toks18
 LaTeX Info: Redefining \[ on input line 2665.
 LaTeX Info: Redefining \] on input line 2666.
-) (fox.aux)
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
+)
+\@glossaryfile=\write3
 
-[1
+Writing glossary file fox.glo 
+(fox.aux)
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+ (fox.toc)
+\tf@toc=\write4
+ [1
 
 {C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 141.
+[2]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 173.
 
-
-("C:\Program Files\MiKTeX 2.9\tex\latex\base\omscmr.fd"
+ ("C:\Program Files\MiKTeX 2.9\tex\latex\base\omscmr.fd"
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 141.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 173.
 \c@spec=\count99
- [2] [3] [4]
-Overfull \hbox (50.62132pt too wide) in paragraph at lines 328--330
-[]\OT1/cmr/m/n/10 We can con-clude from this $\OML/cmm/m/it/10 exec \OT1/cmr/m/
-n/10 (\OML/cmm/m/it/10 comp[] \OT1/cmr/m/n/10 (\OML/cmm/m/it/10 Add x y\OT1/cmr
-/m/n/10 ) \OML/cmm/m/it/10 c\OT1/cmr/m/n/10 ) \OML/cmm/m/it/10 s \OT1/cmr/m/n/1
-0 = \OML/cmm/m/it/10 exec \OT1/cmr/m/n/10 (\OML/cmm/m/it/10 comp[]y\OT1/cmr/m/n
-/10 (\OML/cmm/m/it/10 comp[]x\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 ADDc\OT1/cmr/m/n
-/10 )))\OML/cmm/m/it/10 s$ 
- []
-
-[5] [6] [7]
-Overfull \hbox (5.96404pt too wide) in paragraph at lines 487--488
-[]\OT1/cmr/m/n/10 PUSH 4 (PUSH 5 (ADD (PUSH 2 (PUSH 3 (ADD (PUSH 1 (ITE HALT)))
-)))) 
- []
-
-
-Overfull \hbox (85.49596pt too wide) in paragraph at lines 504--504
+ [3] [4] [5]
+[6] [7] [8]
+Overfull \hbox (105.16495pt too wide) in paragraph at lines 576--576
 [] 
  []
 
-[8]
-Overfull \hbox (22.19534pt too wide) in paragraph at lines 528--528
+[9]
+Overfull \hbox (40.1974pt too wide) in paragraph at lines 602--602
 [] 
  []
 
 
-Overfull \hbox (14.62897pt too wide) in paragraph at lines 535--538
-\OT1/cmr/m/n/10 proof of the def-i-ni-tion meet-ing the spec-i-fi-ca-tion. i.e 
-we show $\OML/cmm/m/it/10 exec c \OT1/cmr/m/n/10 (\OML/cmm/m/it/10 eval \OT1/cm
-r/m/n/10 (\OML/cmm/m/it/10 Ite x y z\OT1/cmr/m/n/10 ) :$
- []
-
-
-Overfull \hbox (10.08311pt too wide) in paragraph at lines 554--554
+Overfull \hbox (10.08311pt too wide) in paragraph at lines 631--631
 [] 
  []
 
-[9] [10]
-Overfull \hbox (3.99403pt too wide) in alignment at lines 658--661
+[10] [11]
+Overfull \hbox (50.2255pt too wide) detected at line 707
+\OML/cmm/m/it/10 exec \OT1/cmr/m/n/10 (\OML/cmm/m/it/10 LITE \OT1/cmr/m/n/10 (\
+OML/cmm/m/it/10 comp[] y c\OT1/cmr/m/n/10 ) (\OML/cmm/m/it/10 comp[] z c\OT1/cm
+r/m/n/10 )) (\OML/cmm/m/it/10 k \OT1/cmr/m/n/10 : \OML/cmm/m/it/10 s\OT1/cmr/m/
+n/10 ) = \OML/cmm/m/it/10 exec \OT1/cmr/m/n/10 (\OML/cmm/m/it/10 if k \OMS/cmsy
+/m/n/10 6\OT1/cmr/m/n/10 = 0 \OML/cmm/m/it/10 then comp[] y c else comp[] z c\O
+T1/cmr/m/n/10 ) \OML/cmm/m/it/10 s
+ []
+
+[12]
+Overfull \hbox (3.99403pt too wide) in alignment at lines 747--750
  [][][] []
  []
 
-[11]
-Overfull \hbox (172.56296pt too wide) detected at line 692
-\OML/cmm/m/it/10 comp \OT1/cmr/m/n/10 (\OML/cmm/m/it/10 Lite \OT1/cmr/m/n/10 (\
-OML/cmm/m/it/10 Val \OT1/cmr/m/n/10 1)(\OML/cmm/m/it/10 Add \OT1/cmr/m/n/10 (\O
-ML/cmm/m/it/10 Val \OT1/cmr/m/n/10 2)(\OML/cmm/m/it/10 Val \OT1/cmr/m/n/10 3))(
-\OML/cmm/m/it/10 Add \OT1/cmr/m/n/10 (\OML/cmm/m/it/10 Val \OT1/cmr/m/n/10 4)(\
-OML/cmm/m/it/10 Val \OT1/cmr/m/n/10 5))) = \OML/cmm/m/it/10 PUSH \OT1/cmr/m/n/1
-0 1 (\OML/cmm/m/it/10 LITE \OT1/cmr/m/n/10 (\OML/cmm/m/it/10 PUSH \OT1/cmr/m/n/
-10 2 \OML/cmm/m/it/10 HALT\OT1/cmr/m/n/10 )(\OML/cmm/m/it/10 PUSH \OT1/cmr/m/n/
-10 3 \OML/cmm/m/it/10 HALT\OT1/cmr/m/n/10 ))
+
+Overfull \hbox (83.3109pt too wide) in paragraph at lines 783--783
+[] 
  []
 
-(fox.bbl) [12] (fox.aux) ) 
+
+Overfull \hbox (133.54694pt too wide) in paragraph at lines 802--802
+[] 
+ []
+
+[13]
+Overfull \hbox (109.33307pt too wide) in paragraph at lines 834--834
+[] 
+ []
+
+[14] [15] [16] [17] (fox.bbl) [18] (fox.aux) ) 
 Here is how much of TeX's memory you used:
- 896 strings out of 493698
- 9915 string characters out of 3144412
- 73348 words of memory out of 3000000
- 4268 multiletter control sequences out of 15000+200000
+ 901 strings out of 493698
+ 9818 string characters out of 3144412
+ 72348 words of memory out of 3000000
+ 4270 multiletter control sequences out of 15000+200000
  9988 words of font info for 36 fonts, out of 3000000 for 9000
  1025 hyphenation exceptions out of 8191
- 27i,8n,20p,241b,189s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfo
-nts/cm/cmbx10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/c
-mbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pf
-b><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Pro
-gram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program File
-s/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 
-2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program Files/MiKTeX 2.9/fonts
-/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pub
-lic/amsfonts/cm/cmr7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfon
-ts/cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy
-10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C
-:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on fox.pdf (12 pages, 190128 bytes).
+ 27i,8n,20p,199b,189s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Program Files/MiKTeX 2.9/font
+s/type1/public/amsfonts/cm/cmbx10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/
+public/amsfonts/cm/cmbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/a
+msfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/
+cm/cmmi7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.
+pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/P
+rogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program Fi
+les/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Files/MiKTeX
+ 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files/MiKTeX 2.9/fonts
+/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pub
+lic/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsf
+onts/cm/cmsy7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/c
+mti10.pfb>
+Output written on fox.pdf (18 pages, 214418 bytes).
 PDF statistics:
- 93 PDF objects out of 1000 (max. 8388607)
+ 112 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

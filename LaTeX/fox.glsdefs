@@ -1,0 +1,30 @@
+\ifglsentryexists{Constructive induction}{}%
+{%
+\gls@defglossaryentry{Constructive induction}%
+{%
+name={Constructive induction},%
+sort={Constructive induction},%
+type={main},%
+first={Constructive induction},%
+firstplural={Constructive inductions},%
+text={Constructive induction},%
+plural={Constructive inductions},%
+description={\PackageError {glossaries} {description key required in \string \newglossaryentry \space for entry `\@glo@label '}{You haven't specified the entry description}},%
+descriptionplural={\PackageError {glossaries} {description key required in \string \newglossaryentry \space for entry `\@glo@label '}{You haven't specified the entry description}},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={},%
+short={},%
+shortplural={},%
+counter={page},%
+parent={},%
+%
+}%
+}%

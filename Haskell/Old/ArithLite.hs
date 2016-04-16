@@ -1,4 +1,4 @@
-module Arith where
+module ArithLite where
 
 data Expr = Val Int | 
 			Add Expr Expr |
@@ -18,13 +18,6 @@ data Code             =   HALT | PUSH Int Code | ADD Code |
 
 comp 	              ::  Expr -> Code
 comp e                =   comp' e HALT
-
-{-
-komp e :: Expr -> Code
-komp (Val n) c
--}
-
-crashtest = comp' (Val 1)((LITE (comp (Val 1))(comp(Val 1))))
 
 comp'                 ::  Expr -> Code -> Code
 comp' (Val n) c       =   PUSH n c

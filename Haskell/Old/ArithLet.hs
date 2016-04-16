@@ -67,11 +67,6 @@ exec (TEL c) 	( s, n:vs)     =   exec c (s, vs)
 exec (VAR n c)  ( s, vs)       =   exec c (((vs!!n):s), vs) -- put value of n on top of s
 
 ----TESTS-----
-ift = exec (comp(Ite (Val 1)(Add (Val 1) (Val 0))(Add (Val 1) (Val 1))))([],[])
-iff = exec (comp(Ite (Val 0)(Add (Val 1) (Val 0))(Add (Val 1) (Val 1))))([],[])
-lift = exec (comp(Lite (Val 1) (Add (Val 1) (Val 0)) (Add (Val 1) (Val 1)))) ([],[])
-liff = exec (comp(Lite (Val 0) (Add (Val 1) (Val 0)) (Add (Val 1) (Val 1))))	([],[])
--- [1][2][1][2] as expected
 evff = eval (Let "x" (Val 1)
 				(Add (Var "y") (Val 2))) []
 evvl = eval (Let "x" (Let "b" (Val 2) 
