@@ -38,18 +38,14 @@ exec (LITE ct ce) (k:s)=   exec (if k /= 0 then ct else ce) s
 
 ----TESTS-----
 lite1 = comp (Lite (Val 1) (Add (Val 2)(Val 3)) (Add (Val 4)(Val 5)))
---	PUSH 1 (LITE (PUSH 2 (PUSH 3 (ADD HALT))) (PUSH 4 (PUSH 5 (ADD HALT))))
 lite2 = exec(comp (Lite (Val 1) (Add (Val 2)(Val 3)) (Add (Val 4)(Val 5)))) []
---[5]
 lite3 =  eval (Ite (Val 1) (Add(Val 2)(Val 3)) (Add(Val 4)(Val 5)))
---5
 
 lite4 = comp (Lite (Val 0) (Add (Val 2)(Val 3)) (Add (Val 4)(Val 5)))
---	PUSH 0 (LITE (PUSH 2 (PUSH 3 (ADD HALT))) (PUSH 4 (PUSH 5 (ADD HALT))))
 lite5 = exec(comp (Lite (Val 0) (Add (Val 2)(Val 3)) (Add (Val 4)(Val 5)))) []
---[5]
+
 lite6 =  eval (Ite (Val 0) (Add(Val 2)(Val 3)) (Add(Val 4)(Val 5)))
---5
+
 
 
 

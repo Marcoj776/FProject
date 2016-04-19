@@ -99,8 +99,9 @@ posv = comp' (Var "v") ["v"] (comp' (Var "x") ["v", "y", "x"] HALT)
 -- ["v"] is cxt which is Context
 tel = comp (Let "v" (Val 1) (Add (Val 2) (Var "v")))
 
-
-
+inn = exec (comp (Add (Let "a" (Val 1)(Add (Var "a") (Add (Val 2) (Var "a"))))(Val 1))) ([],[])
+out = exec (comp (Add (Let "a" (Val 1)(Add (Var "a") (Add (Val 2) (Var "a"))))(Var "a"))) ([],[])
+-- a+(2+a) + a
 
 
 
