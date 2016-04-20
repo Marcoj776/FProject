@@ -13,7 +13,6 @@
 \begin{document}
 \maketitle
 
-\tableofcontents
 
 \newcommand{\BH}{Bahr and Hutton}
 \newcommand{\vm}{virtual machine}
@@ -113,7 +112,7 @@ which defines their semantics,
 and a stack of integers 
 ``to make the manipulation of argument values explicit''.
 
-	\[ \textbf{data} \  Expr = Val \ Int \, | \, Add \ Expr \ Expr\]
+	\[ \textbf{data}\  Expr = Val\ Int \, | \, Add\ Expr\ Expr\]
 
 \newcommand{\eval}{$eval$}
 \newcommand{\expr}{$Expr$}
@@ -123,8 +122,8 @@ and a stack of integers
 
 \begin{eqnarray*}
 	 eval &::& Expr \rightarrow Int \\ 
-	 eval (Val \  n) &=& n \\
-	 eval (Add \  x \  y) &=& eval \  x + eval \  y 
+	 eval (Val\  n) &=& n \\
+	 eval (Add\  x\  y) &=& eval\  x + eval\  y 
 \end{eqnarray*}
 
 	\[ \textbf{type} \, Stack = [Int]\]
@@ -137,11 +136,11 @@ a $Val$ constructor will always precede and integer
 and an Add will always precede two more expressions.
 It is the constructor \emph{together} with 
 it's arguments that make it of \textbf{type}
-expression, i.e $Val \ n$ or $Add \ x \ y$,
+expression, i.e $Val\ n$ or $Add\ x\ y$,
 where $n$ is an $Int$ and $x$ and $y$ are $Expr$.
 however because of curried function application,
 we cannot simply write 
-$eval \ Val \ n$ or $eval \ Add \ x \ y$,
+$eval\ Val\ n$ or $eval\ Add\ x\ y$,
 because that applies \eval to 2 and 3 arguments respectively,
 thus we package each expression into a single arguments
 by using parentheses, so long as each is a
@@ -152,11 +151,11 @@ On the right hand side of the equations is a
 description of how to compute 
 the result when $eval$ is applied to $Val$ and
 $Add$ expressions respectively.
-$eval \ Val \ n$ simply returns $n$
-on the other hand $eval \ Add \ x \ y$
+$eval\ Val\ n$ simply returns $n$
+on the other hand $eval\ Add\ x\ y$
 is recursively defined as we do not yet know
 the values of $x$ and $y$; \BH\ are defining the
-semantics of $Add \ x \ y$ \emph{compositionally} by the 
+semantics of $Add\ x\ y$ \emph{compositionally} by the 
 semantics of each of it's argument expressions, $x$ and $y$.
 
 Making the semantics compositional allows
@@ -186,11 +185,11 @@ components and two correctness equations\cite{bandh}~[page~9]:
 \newtheorem{spec}{Specification}
 \begin{spec}[Bahr and Hutton 3]
 \thlabel{spec1}
-	\[ exec \  (comp \  x) \  s = eval \  x:s \]
+	\[ exec\  (comp\  x)\  s = eval\  x:s \]
 \end{spec}
 \begin{spec}[Bahr and Hutton 4]
 \thlabel{spec2}
-	\[ exec \  (comp' \  x \  c) \ s = exec \  c \  (eval \, x:s) \]
+	\[ exec\  (comp'\  x\  c)\ s = exec\  c\  (eval \, x:s) \]
 \end{spec}
 
 NB: \BH\ have labelled them 3 and 4 respectively, 
@@ -201,14 +200,14 @@ and will appear as 3 and 4 in quotations.
 \newcommand{\compp}{$comp'$}
 
 ``Calculations begin with equations
-of the form $exec \  (comp' \  x \  c) \  s$
+of the form $exec\  (comp'\  x\  c)\  s$
 as in equation (4),
 and proceed by constructive induction on 
 expression $x$, 
 and aim to re-write it into the form
-$exec \  c' \  s$ for some code $c'$
+$exec\  c'\  s$ for some code $c'$
 from which we can then conclude that the definition
-$comp \  x \  c = c'$ satisfies the 
+$comp\  x\  c = c'$ satisfies the 
 specification in this case.''\cite{bandh}
 
 It is perhaps strange in appearance,
@@ -230,24 +229,24 @@ calculation of \comp\ and \exec\ definitions
 for \val\ and \add\ expressions\cite[section 2.5]{bandh}.
 
 Starting from \thref{spec1} and the expression $x$
-being the base case $Val  \ n$, 
+being the base case $Val\ n$, 
 the calculation proceeds as follows\cite{bandh}:
 %im paraphrasing here does that count?
-(recall: \( eval (Val \  x) = n  \) )
+(recall: \( eval (Val\  x) = n  \) )
 
 \begin{align*}
-	&exec \ (comp' \ (Val \ n) \ c) \ s \\
-	&= \{ \} \\
-	&exec \ c \ (eval \ (Val \ n) : s) \\
-	&= \{definition \ of \ eval\} \\
-	&exec \ c \ (n:s)
+	&exec\ (comp'\ (Val\ n)\ c)\ s \\
+	=\, & \{ \} \\
+	&exec\ c\ (eval\ (Val\ n) : s) \\
+	=& \{definition\ of\ eval\} \\
+	&exec\ c\ (n:s)
 \end{align*}
 
 Now there are no further definitions that we can apply,
 but we can invent a definition for $exec$ which allows
 us to continue by solving the equation:
 
-	\[ exec \ c' \ s = exec \ c \ (n : s) \]
+	\[ exec\ c'\ s = exec\ c\ (n : s) \]
 
 Currently we have the right hand side of this equation,
 however $c'$ is a new variable only on one side of the equation
@@ -256,7 +255,7 @@ In algebra, one cannot use an unknown variable to define
 another without also making it's value unknown,
 in the same way we can't use expressions with
 unbound variables to define other expressions,
-e.g \(y = x + z \ | where \ z = 1\), we cannot
+e.g \(y = x + z\ | where\ z = 1\), we cannot
 know the value of $y$ if $x$ is not given.
 
 ``The solution is to package these two
@@ -268,48 +267,48 @@ that takes these two variables as arguments,''
 
 ``and define a new equation for exec as follows:''
 
-	\[ exec \ (PUSH \ n \ c) \ s = exec \ c \ (n :s) \]
+	\[ exec\ (PUSH\ n\ c)\ s = exec\ c\ (n :s) \]
 
-``executing the code $PUSH \ n \ c$ 
+``executing the code $PUSH\ n\ c$ 
 proceeds by pushing the value n onto the stack and
 then executing the code $c$'', furthermore
 we can see that we have $n$ and $c$ on both
 sides of the equation and therefore no longer unbound.
 
 \begin{align*}
-	&exec \ c \ (n:s) \\
-	&= \{definition \ of \ exec\} \\
-	&exec \ (PUSH \ n \ c) \ s
+	&exec\ c\ (n:s) \\
+	&= \{definition\ of\ exec\} \\
+	&exec\ (PUSH\ n\ c)\ s
 \end{align*}
 
-Our equation is now in the form $exec \ c' \ s$
-where $c' = PUSH \ n \ c$, 
+Our equation is now in the form $exec\ c'\ s$
+where $c' = PUSH\ n\ c$, 
 because we began from 
-\(exec \ (comp' \ (Val \ n) \ c) \ s \),
+\(exec\ (comp'\ (Val\ n)\ c)\ s \),
 and every equation was valid in the derivation,
 it is safe to conclude that 
 
-	\[exec \ (comp' \ (Val \ n) \ c) \ s = exec \ (PUSH \ n \ c) \ s\]
+	\[exec\ (comp'\ (Val\ n)\ c)\ s = exec\ (PUSH\ n\ c)\ s\]
 
 or more specifically, we have \emph{discovered} that 
 	
-	\( comp' \ (Val \ n) \ c =  PUSH \ n \ c \)
+	\( comp'\ (Val\ n)\ c =  PUSH\ n\ c \)
 
 Next \BH\ calculate definitions for the inductive case, 
-$Add \ x \ y$,
+$Add\ x\ y$,
 we call it inductive because we don't yet know 
 the values of $x$ and $y$ however we are assuming
 that they are expressions as well,
 because otherwise there would be a type error.
 Starting from a similar point,
-(recall: \( eval (Add \  x \  y) = eval \  x + eval \  y  \) )
+(recall: \( eval (Add\  x\  y) = eval\  x + eval\  y  \) )
 
 \begin{align*}
-	&exec \ (comp' \ (Add \ x \ y) \ c) \ s \\
-	&= \{specification \ (4) \} \\
-	&exec \ c \ (eval \ (Add \ x \ y) : s) \\
-	&= \{definition \ of \ eval\} \\
-	&exec \ c \ (eval \ x + eval \ y :s)
+	&exec\ (comp'\ (Add\ x\ y)\ c)\ s \\
+	&= \{specification\ (4) \} \\
+	&exec\ c\ (eval\ (Add\ x\ y) : s) \\
+	&= \{definition\ of\ eval\} \\
+	&exec\ c\ (eval\ x + eval\ y :s)
 \end{align*}
 
 Again we are stuck, however using a similar process
@@ -318,29 +317,29 @@ Moreover being an inductive case,
 we can make use of the induction 
 hypotheses for $x$ and $y$\cite{bandh}.
 
-\[exec \ (comp' \ x \ c) \ s = exec \ c \ (eval \ x:s) \]
+\[exec\ (comp'\ x\ c)\ s = exec\ c\ (eval\ x:s) \]
 
-\[exec \ (comp' \ y \ c) \ s = exec \ c \ (eval \ y:s) \]
+\[exec\ (comp'\ y\ c)\ s = exec\ c\ (eval\ y:s) \]
 
 Although all that is on top of the stack on the
-RHS of this equation is $eval \ x$ or $eval \ y$,
+RHS of this equation is $eval\ x$ or $eval\ y$,
 but we want to use both values to make the addition.
 The solution is to do one after the other,
 but nonetheless we know we can have the top two 
-stack elements to be $eval \ x$ or $eval \ y$.
+stack elements to be $eval\ x$ or $eval\ y$.
 Therefore we can use a new $Code$ constructor
 that when executed, adds the top two stack elements
 together and puts the result on top of the stack.
 
 \begin{align*}
 	&ADD :: Code \rightarrow Code \\
-	&exec \ (ADD \ c) \ (m:n:s) = exec \ c \ ((n+m:s))
+	&exec\ (ADD\ c)\ (m:n:s) = exec\ c\ ((n+m:s))
 \end{align*}
 
 Ordering is not important in this case; it is a matter of choice,
 \BH\ mention here that their choice is to use
 left-to-right evaluation by pushing $n$ 
-or (as we will see)  $eval \ x$ on first,
+or (as we will see)  $eval\ x$ on first,
 again for consistency with CCC, 
 I have used their definition.
 
@@ -348,14 +347,14 @@ Now we have the operation definition for the
 virtual machine we continue the calculation 
 
 \begin{align*}
-	&= \{ defintion \ of \ exec \} \\
-	&exec \ (ADD c) \ (eval \ y : eval \ x : s) \\
-	&= \{ induction \ hypothesis \ for \ y \} \\
-	&exec \ (comp' y (comp' x (ADD c))) s
+	&= \{ defintion\ of\ exec \} \\
+	&exec\ (ADD c)\ (eval\ y : eval\ x : s) \\
+	&= \{ induction\ hypothesis\ for\ y \} \\
+	&exec\ (comp' y (comp' x (ADD c))) s
 \end{align*}
 
 We can conclude from this 
-\[ exec \ (comp' \ (Add \ x \ y) \ c) \ s = exec \ (comp' y (comp' x (ADD c))) s \]
+\[ exec\ (comp'\ (Add\ x\ y)\ c)\ s = exec\ (comp' y (comp' x (ADD c))) s \]
 
 An important aspect of the \BH method
 is that the equations that construct the 
@@ -372,42 +371,44 @@ it's only a small point}
 for the compiler and virtual machine:
 
 \begin{eqnarray}
-	&\textbf{data} \ Code &= HALT | PUSH Int Code | ADD Code \nonumber \\
+	&\textbf{data}\ Code &= HALT | PUSH Int Code | ADD Code \nonumber \\
 	&comp &:: Expr \rightarrow Code \nonumber \\
-	&comp \ x &= comp' \ x \ HALT \label{comp}\\
+	&comp\ x &= comp'\ x\ HALT \label{comp}\\
 	&comp' &:: Expr \rightarrow Code \rightarrow Code \nonumber \\
-	&comp' \ (Val \ n) \ c &= PUSH \ n \ c \label{comppval}\\
-	&comp' \ (Add \ x \ y) \ c 
-				&= comp' \ x \ (comp' \ y (ADD \ c)) \label{comppadd}\\
+	&comp'\ (Val\ n)\ c &= PUSH\ n\ c \label{compval}\\
+	&comp'\ (Add\ x\ y)\ c 
+				&= comp'\ x\ (comp'\ y (ADD\ c)) \label{compadd}\\
 	&exec &:: Code  \rightarrow Stack \rightarrow Stack \nonumber \\
-	&exec \ HALT \ s &= s \label{exechalt}\\
-	&exec \ (PUSH \ n \ c) \ s &= exec \ c \ (n:s) \label{execpush}\\
-	&exec \ (ADD \ c) \ (m:n:s) &= exec \ c \ ((n + m):s) \label{execadd}
+	&exec\ HALT\ s &= s \label{exechalt}\\
+	&exec\ (PUSH\ n\ c)\ s &= exec\ c\ (n:s) \label{execpush}\\
+	&exec\ (ADD\ c)\ (m:n:s) &= exec\ c\ ((n + m):s) \label{execadd}
 \end{eqnarray}
 
 \subsection{Testing Add and Val expressions}
-
-To check these calculations, we can do several tests:
-Calculate and compare by hand 
-the code that is produced or executed
-by the compiler definitions, 
-against the results using the Haskell implementation in GHCi.
-Compare the result of the executed code against the result
-given by the interpreter. This result is arguably the most
-important because if a counter example is found,
-then our specification for 
-compiler correctness 
-\[ exec\ (comp'\ x\ c) s = exec\ c\ (eval\ x : s) \]
-does not always hold.
-
-%After these tests we can prove the equations meet the specification
-%by the method that \BH describe in CCC \cite[page 14; derivation vs proof]{bandh}
 
 To conclude this section I will test the functionality
 of Add and Val, with a somewhat complicated
 example.
 This will give us a chance to look at the code that their
 compiler generates and how the virtual machine executes it.
+
+In checking these calculations, we can do several tests:
+Calculate and compare by hand 
+the code that is produced or executed
+by the compiler definitions, 
+against the results using the Haskell implementation in GHCi.
+Compare the result of the executed code against the result
+given by the interpreter. 
+This result is arguably the most
+important because if a counter example is found,
+then our specification for compiler correctness 
+\[ exec\ (comp'\ x\ c) s = exec\ c\ (eval\ x : s) \]
+does not always hold, 
+which means our calculations were wrong
+assuming the test expression is valid.
+
+%After these tests we can prove the equations meet the specification
+%by the method that \BH describe in CCC \cite[page 14; derivation vs proof]{bandh}
 
 The equation we'll be looking at is:
 
@@ -428,11 +429,11 @@ especially when functions become more complicated.
 &comp\ (Add\ (Add\ (Val\ 0)\ (Val\ 1))\ (Val\ 2)) \\
 &= \{ definition\ \ref{comp} \} \\
 &comp'\ (Add\ (Add\ (Val\ 0)\ (Val\ 1))\ (Val\ 2))\ 			&(HALT) \\
-&= \{ definition\ \ref{comppadd} \} \\
+&= \{ definition\ \ref{compadd} \} \\
 &comp'\ (Add\ (Val\ 0)\ (Val\ 1))\ (comp'\ (Val\ 2) 	  &(ADD\ HALT)) \\
-&= \{ definitions\ \ref{comppadd}\ and\ \ref{comppval} \ \} \\
+&= \{ definitions\ \ref{compadd}\ and\ \ref{compval}\ \} \\
 &comp'\ (Val\ 0)\ (comp'\ (Val\ 1)\		&(ADD\ (PUSH\ 2\ (ADD\ HALT)))) \\
-&= \{ definition\ \ref{comppval}\ twice \ \} \\
+&= \{ definition\ \ref{compval}\ twice\ \} \\
 &					 &PUSH\ 0\ (PUSH\ 1\ (ADD\ (PUSH\ 2\ (ADD\ HALT)))) \\
 \end{align*}
 
@@ -462,15 +463,15 @@ and the RHS is the current state of the run-time stack
 \subsubsection{Interpretation}
 
 \begin{eqnarray}
-	 eval (Val \  n) &=& n \label{evalval}\\
-	 eval (Add \  x \  y) &=& eval \  x + eval \  y \label{evaladd}
+	 eval (Val\  n) &=& n \label{evalval}\\
+	 eval (Add\  x\  y) &=& eval\  x + eval\  y \label{evaladd}
 \end{eqnarray}
 
 \begin{align*}
 	&eval\ (Add\ (Add\ (Val\ 0)\ (Val\ 1))\ (Val\ 2)) \\
 	&= \{ \ref{evaladd} \} \\
 	&eval\ (Add\ (Val\ 0)\ (Val\ 1))\ +\ eval\ (Val\ 2) \\
-	&= \{ \ref{evaladd} and \ref{evalval} \} \\
+	&= \{ \ref{evaladd}\ and\ \ref{evalval} \} \\
 	&eval\ (Val\ 0)\ +\ eval\ (Val\ 1)\ +\ 2 \\
 	&= \{ \ref{evalval}\ twice\} \\
 	&0\ +\ 1\ +\ 2 \\
@@ -478,26 +479,27 @@ and the RHS is the current state of the run-time stack
 	&3
 \end{align*}
 
-These tests agrees with the same code being executed
-using the Haskell implementation of the \vm.
-GHCi: \( [3] \)
+The results of the execution and interpretation test
+agree with each other and with the same tests
+using the Haskell implementation of the \vm\ and interpreter.
+GHCi: \( [3],\ 3 \)
 
 
-\subsubsection{Proof}
-
-\begin{align*}
-	&exec \ (comp' \ (Add \ x \ y) \ c) \ s \\
-	&= \{specification \ (4) \} \\
-	&exec \ c \ (eval \ (Add \ x \ y) : s) \\
-	&= \{definition \ of \ eval\} \\
-	&exec \ c \ (eval \ x + eval \ y :s) \\
-	&ADD :: Code \rightarrow Code \\
-	&exec \ (ADD \ c) \ (m:n:s) = exec \ c \ ((n+m:s)) \\
-	&= \{ defintion \ of \ exec \} \\
-	&exec \ (ADD c) \ (eval \ y : eval \ x : s) \\
-	&= \{ induction \ hypothesis \ for \ y \} \\
-	&exec \ (comp' y (comp' x (ADD c))) s
-\end{align*}
+%\subsubsection{Proof}
+%
+%\begin{align*}
+%	&exec\ (comp'\ (Add\ x\ y)\ c)\ s \\
+%	&= \{specification\ (4) \} \\
+%	&exec\ c\ (eval\ (Add\ x\ y) : s) \\
+%	&= \{definition\ of\ eval\} \\
+%	&exec\ c\ (eval\ x + eval\ y :s) \\
+%	&ADD :: Code \rightarrow Code \\
+%	&exec\ (ADD\ c)\ (m:n:s) = exec\ c\ ((n+m:s)) \\
+%	&= \{ defintion\ of\ exec \} \\
+%	&exec\ (ADD c)\ (eval\ y : eval\ x : s) \\
+%	&= \{ induction\ hypothesis\ for\ y \} \\
+%	&exec\ (comp'\ y\ (comp'\ x\ (ADD\ c))) s
+%\end{align*}
 
 %%%%%%%%%%%%%%%%%%%%	CONDITIONALS	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -532,14 +534,17 @@ a condition, a true case, and a false case.
 In our language these will be three expressions
 that follow an ``\ite'' constructor.
 
-	\[ \textbf{data} \ Expr = ... | Ite \ Expr \ Expr \ Expr \]
+	\[ \textbf{data}\ Expr = ... | Ite\ Expr\ Expr\ Expr \]
 
 the semantics of it will be
 
-	\[eval(Ite\ x\ y\ z) \\
-		= if\ eval\ x \not= 0 then\ eval\ y\ else\ eval\ z \]
+\begin{equation}
+eval(Ite\ x\ y\ z) \\
+	= if\ eval\ x \not= 0 then\ eval\ y\ else\ eval\ z 
+			\label{evalite}
+\end{equation}
 
-The condition $eval \ x  \not= 0$ is very basic,
+The condition $eval\ x  \not= 0$ is very basic,
 and we may benefit more from having variable conditions
 which we could define at source level,
 that could be done if we had an evaluation function 
@@ -561,8 +566,8 @@ type of arguments as before,
 so there is no need to update the specifications yet
 
 \begin{eqnarray*}
-	 &exec \  (comp \  x) \  s &= eval \  x:s \\
-	 &exec \  (comp' \  x \  c) \ s &= exec \  c \  (eval \ x:s) 
+	 &exec\  (comp\  x)\  s &= eval\  x:s \\
+	 &exec\  (comp'\  x\  c)\ s &= exec\  c\  (eval\ x:s) 
 \end{eqnarray*}
 
 \subsection{Calculation}
@@ -575,11 +580,11 @@ we begin with it's LHS where $x$ is our
 \ite\ expression.
 
 \begin{align*}
-	&exec \ (comp' \ (Ite \ x \ y \ z) \ c) \ s \\
-	&= \{specification \ (2) \} \\
-	&exec \ c \ (eval \ (Ite \ x \ y \ z) : s) \\
-	&= \{definition \ of \ eval\} \\
-	&exec \ c \ (if \ eval \ x \ \not= 0 \ then \ eval \ y \ else \ eval \ z :s)
+	&exec\ (comp'\ (Ite\ x\ y\ z)\ c)\ s \\
+	&= \{specification\ (2) \} \\
+	&exec\ c\ (eval\ (Ite\ x\ y\ z) : s) \\
+	&= \{definition\ of\ eval\} \\
+	&exec\ c\ (if\ eval\ x \not= 0\ then\ eval\ y\ else\ eval\ z :s)
 \end{align*}
 
 There are no more definitions to apply from here,
@@ -591,18 +596,18 @@ just like with \BH's calculation of \add.
 
 The inductive hypotheses are:
 \begin{eqnarray*}
-	exec \ (comp' \ x \ c) \ s &=& exec \ c \ (eval \ x:s) \\
-	exec \ (comp' \ y \ c) \ s &=& exec \ c \ (eval \ y:s) \\
-	exec \ (comp' \ z \ c) \ s &=& exec \ c \ (eval \ z:s)
+	exec\ (comp'\ x\ c)\ s &=& exec\ c\ (eval\ x:s) \\
+	exec\ (comp'\ y\ c)\ s &=& exec\ c\ (eval\ y:s) \\
+	exec\ (comp'\ z\ c)\ s &=& exec\ c\ (eval\ z:s)
 \end{eqnarray*}
 
 However, to be able to use them,
-we must push $eval \ x,y,z$ onto the stack
+we must push $eval\ x,y,z$ onto the stack
 in some order of our choice.
 So we must solve the generalised equation:
 
-	\[ exec \ c' \ (k:m:n:s) 
-		= exec \ c \ (if \ k \not= 0 \ then \ m \ else \ n:s)\]
+	\[ exec\ c'\ (k:m:n:s) 
+		= exec\ c\ (if\ k \not= 0\ then\ m\ else\ n:s)\]
 
 Our code constructor to solve this will be
 
@@ -610,8 +615,8 @@ Our code constructor to solve this will be
 
 and it's definition for the \vm
 
-	\[ exec \ (ITE \ c) \ (k:m:n:s) 
-		= exec \ c \ (if \ k \not= 0 \ then \ m \ else \ n:s) \]
+	\[ exec\ (ITE\ c)\ (k:m:n:s) 
+		= exec\ c\ (if\ k \not= 0\ then\ m\ else\ n:s) \]
 
 i.e executing and ITE instruction
 checks the top of the stack for the condition $k \not= 0$
@@ -620,30 +625,30 @@ else k and m are removed.
 Using this to continue the calculation, we have
 
 \begin{align*}
-	&exec \ c \ (if \ eval \ x \ \not= 0 \ then \ eval \ y \ else \ eval \ z :s) \\
-	&= \{definition \ of \ exec\} \\
-	&exec \ (ITE \ c) \ (eval \ x:eval \ y:eval \ z:s) \\
+	&exec\ c\ (if\ eval\ x\ \not= 0\ then\ eval\ y\ else\ eval\ z :s) \\
+	&= \{definition\ of\ exec\} \\
+	&exec\ (ITE\ c)\ (eval\ x:eval\ y:eval\ z:s) \\
 	&= \{induction\ hypothesis\ for\ x\} \\
-	&exec \ (comp' \ x \ (ITE \ c)) \ (eval \ y:eval \ z:s) \\
+	&exec\ (comp'\ x\ (ITE\ c))\ (eval\ y:eval\ z:s) \\
 	&= \{induction\ hypothesis\ for\ y\} \\
-	&exec \ (comp' \ y \ (comp' \ x \ (ITE \ c))) \ (eval \ z:s) \\
+	&exec\ (comp'\ y\ (comp'\ x\ (ITE\ c)))\ (eval\ z:s) \\
 	&= \{induction\ hypothesis\ for\ z\} \\
-	&exec \ (comp' \ z (comp' \ y \ (comp' \ x \ (ITE \ c)))) \ s
+	&exec\ (comp'\ z\ (comp'\ y\ (comp'\ x\ (ITE\ c))))\ s
 \end{align*}
 
 I conclude from this calculation these new definitions
 for the compiler and \vm: 
 
 \begin{eqnarray}
-	comp' \ (Ite \ x \ y \ z) \ c &=&  comp' \ z \ (comp' \ y \ (comp' \ x \ (ITE \ c))) \label{compite}\\
-	exec \ (ITE \ c) \ (k:m:n:s) &=& exec \ c \ ((if \ k \not= 0 \ then \ m \ else \ n):s) \label{execite}
+	comp'\ (Ite\ x\ y\ z)\ c &=&  comp'\ z\ (comp'\ y\ (comp'\ x\ (ITE\ c))) \label{compite}\\
+	exec\ (ITE\ c)\ (k:m:n:s) &=& exec\ c\ ((if\ k \not= 0\ then\ m\ else\ n):s) \label{execite}
 \end{eqnarray}
 
 \subsection{Testing}
 
 For the testing, we can create an example \ite\ expression
 
-	\[Ite \ (Val \ 1) (Add \ (Val \ 2) (Val \ 3)) (Add \ (Val \ 4) (Val \ 5)))) \]
+	\[Ite\ (Val\ 1) (Add\ (Val\ 2) (Val\ 3)) (Add\ (Val\ 4) (Val\ 5)))) \]
 
 This expression would test that
 each of the sub-expressions 
@@ -660,29 +665,33 @@ information to these series of tests}.
 \subsubsection{Compilation}
 
 \begin{align*}
-	&comp' (Ite\ 
-			(Val\ 1) 
-			(Add\ (Val\ 2)\ (Val\ 3)) 
+	&comp' (Ite\
+			(Val\ 1)
+			(Add\ (Val\ 2)\ (Val\ 3))
 			(Add\ (Val\ 4)\ (Val\ 5))) \\
 	&= \{ equation\ \ref{compite} \}\ \\ 
 	&comp'\ (Add\ (Val\ 4)\ (Val\ 5))\\
 		&(comp'\ (Add\ (Val\ 2)\ (Val\ 3))\\
 			&(comp'\ (Val\ 1)\ (ITE\  HALT))) \\
-	&= \{ equations\ \ref{comppadd}\ twice,\ and\ \ref{comppval}\ once\} \\
+	&= \{ equations\ \ref{compadd}\ twice,\ and\ \ref{compval}\ once\} \\
 	&comp'\ (Val\ 4)\ 
 		(comp'\ (Val\ 5)\ \\
 				&(ADD\ (comp'\ (Val\ 2)\ 
 						(comp'\ (Val\ 3)\ \\
 							&(ADD\ (PUSH\ 1\ 
 								(ITE\ HALT))))))) \\
-	&= \{equation \ 3, \ 4 \ times \} \\
-	&PUSH \ 4 (PUSH \ 5 (ADD (PUSH 2 (PUSH 3 (ADD (PUSH \ 1 \ (ITE \ HALT)))))))
+	&= \{equation\ 3,\ 4\ times \} \\
+	&PUSH\ 4\ (PUSH\ 5\ 
+		(ADD\ (PUSH\ 2\ (PUSH\ 3\ 
+			(ADD\ (PUSH\ 1\ (ITE\ HALT)))))))
 \end{align*}
 
 This agrees with the same expression being compiled
 using the Haskell implementation of the compiler.
 GHCi:
-\[ PUSH\ 4(PUSH\ 5(ADD\ (PUSH\ 2(PUSH\ 3(ADD\ (PUSH\ 1(ITE\ HALT))))))) \]
+\[ PUSH\ 4\ (PUSH\ 5\
+	(ADD\ (PUSH\ 2\ (PUSH\ 3\ 
+		(ADD\ (PUSH\ 1\ (ITE\ HALT))))))) \]
 	
 \subsubsection{Execution}
 
@@ -690,20 +699,24 @@ In executing this code with an empty stack, we get: [5]
 
 By hand, this calculation is as follows:
 \begin{align*}
-	&exec \, (PUSH \, 4 (PUSH \, 5 (ADD (PUSH \, 2 (PUSH \, 3(ADD(PUSH \, 1(ITE \, HALT)))))))) \ &[\, ] \\
-	&= \{equation \ \ref{execpush}, twice\} \\ 
-	&exec \ (ADD \ (PUSH \ 2 \ (PUSH \ 3 \ (ADD \ (PUSH \ 1 \ (ITE \ HALT)))))) \ &[5,4] \\
-	&= \{equation \ \ref{execadd}\} \\
-	&exec \ (PUSH \ 2 \ (PUSH \ 3 \ (ADD \ (PUSH \ 1 \ (ITE \ HALT))))) \ &[9] \\
-	&= \{equation \ \ref{execpush}, twice\} \\ 
-	&exec \ (ADD \ (PUSH \ 1 \ (ITE \ HALT))) \ &[3, 2, 9] \\
-	&= \{equation \ \ref{execadd}\} \\
-	&exec \ (PUSH \ 1 \ (ITE \ HALT)) \ &[5, 9] \\
-	&= \{equation \ \ref{execpush}\} \\
-	&exec \ (ITE \ HALT) \ &[1, 5, 9] \\
-	&= \{equation \ \ref{execite}\} \\
-	&exec \ HALT \ &[5] \\
-	&= \{equation \ \ref{exechalt}\} \\
+	&exec \, (PUSH \, 4\, (PUSH \, 5\, 
+			(ADD\, (PUSH \, 2\, (PUSH \, 3\, 
+			(ADD\, (PUSH \, 1\, (ITE\, HALT))))))))\ &[\, ] \\
+	&= \{equation\ \ref{execpush},\ twice\} \\ 
+	&exec\ (ADD\ (PUSH\ 2\ (PUSH\ 3\ 
+			(ADD\ (PUSH\ 1\ (ITE\ HALT))))))\ &[5,4] \\
+	&= \{equation\ \ref{execadd}\} \\
+	&exec\ (PUSH\ 2\ (PUSH\ 3\ 
+			(ADD\ (PUSH\ 1\ (ITE\ HALT)))))\ &[9] \\
+	&= \{equation\ \ref{execpush}, twice\} \\ 
+	&exec\ (ADD\ (PUSH\ 1\ (ITE\ HALT)))\ &[3, 2, 9] \\
+	&= \{equation\ \ref{execadd}\} \\
+	&exec\ (PUSH\ 1\ (ITE\ HALT))\ &[5, 9] \\
+	&= \{equation\ \ref{execpush}\} \\
+	&exec\ (ITE\ HALT) &[1, 5, 9] \\
+	&= \{equation\ \ref{execite}\} \\
+	&exec\ HALT\ &[5] \\
+	&= \{equation\ \ref{exechalt}\} \\
 	&[5]
 \end{align*}
 
@@ -716,25 +729,29 @@ As the \vm\ and interpreter are in agreement,
 we have shown an example of the compiler 
 satisfying the compiler correctness specification
 
-\[ exec \ c \ (eval \ (Ite \ x \ y \ z):s) 
-	= exec (comp' \ (Ite \ x \ y \ z) c)  \ s  \]
+\[ exec\ c\ (eval\ (Ite\ x\ y\ z):s) 
+	= exec (comp'\ (Ite\ x\ y\ z) c)\ s  \]
 
-\begin{align*}
-	&exec \ c \ (eval \ (Ite \ x \ y \ z):s) \\
-	&= \{definition \ of \ eval\} \\ 
-	&exec \ c \ (if \ eval \ x \ \not= 0 \ then \ eval \ y \ else \ eval \ z :s) \\
-	&= \{define\: exec \ (ITE \ c) (k : m : n : s) = exec \ c \ ((if \ k \not=0 \ then \ m : s\ else \ n) : s \} \\
-	& exec \ (ITE \ c) \ (eval \ x : eval \ y : eval \ z : s) \\
-	&= \{induction\ hypothesis \ for \ x \} \\
-	& exec \ (comp' \ x \ (ITE \ c)) \ (eval \ y : eval \ z : s) \\
-	&= \{induction\ hypothesis \ for \ y \} \\
-	& exec \ (comp' \ y \ (comp' \ x \ (ITE \ c))) \ (eval \ z : s) \\
-	&= \{induction\ hypothesis \ for \ z\} \\
-	& exec \ (comp' \ z \ (comp' \ y \ (comp' \ x \ (ITE \ c)))) \ s \\
-	&= \{definition \ of \ comp' \} \\
-	& exec (comp' \ (Ite \ x \ y \ z) c)  \ s \\
-	&QED
-\end{align*} 
+\subsubsection{Interpretation}
+
+%\subsubsection{proof}
+%
+%\begin{align*}
+%	&exec\ c\ (eval\ (Ite\ x\ y\ z):s) \\
+%	&= \{definition\ of\ eval\} \\ 
+%	&exec\ c\ (if\ eval\ x\ \not= 0\ then\ eval\ y\ else\ eval\ z :s) \\
+%	&= \{define\: exec\ (ITE\ c) (k : m : n : s) = exec\ c\ ((if\ k \not=0\ then\ m : s\ else\ n) : s \} \\
+%	& exec\ (ITE\ c)\ (eval\ x : eval\ y : eval\ z : s) \\
+%	&= \{induction\ hypothesis\ for\ x \} \\
+%	& exec\ (comp'\ x\ (ITE\ c))\ (eval\ y : eval\ z : s) \\
+%	&= \{induction\ hypothesis\ for\ y \} \\
+%	& exec\ (comp'\ y\ (comp'\ x\ (ITE\ c)))\ (eval\ z : s) \\
+%	&= \{induction\ hypothesis\ for\ z\} \\
+%	& exec\ (comp'\ z\ (comp'\ y\ (comp'\ x\ (ITE\ c))))\ s \\
+%	&= \{definition\ of\ comp' \} \\
+%	& exec (comp'\ (Ite\ x\ y\ z) c)\ s \\
+%	&QED
+%\end{align*} 
 
 In retrospect, this kind of evaluation of the condition
 is eager; both cases regardless of the
@@ -752,18 +769,19 @@ that we don't need to execute.
 Our ``Lazy if then else'' function
  will be called \lite.
 
-	\[ \textbf{data} \ Expr = ... | Lite \ Expr \ Expr \ Expr \]
+	\[ \textbf{data}\ Expr = ... | Lite\ Expr\ Expr\ Expr \]
 
 and it's semantics are
 
-	\[eval(Lite \ x \ y \ z) = if \ eval \ x \ \not= 0 \ then \ eval \ y \ else \ eval \ z \]
+\begin{equation}
+eval(Lite\ x\ y\ z) \\
+	= if\ eval\ x \not= 0 then\ eval\ y\ else\ eval\ z 
+			\label{evallite}
+\end{equation}
 
-which are the same as the semantics
-of an \ite expression as 
-expressions cannot be lazily evaluated,
-%\begin{eqnarray}
-%	eval(x) 
-%\end{eqnarray}
+Expressions cannot be lazily evaluated
+so \lite\ has the same semantics
+as an \ite\ expression,
 because lazy evaluation means evaluating
 something only when the evaluation function
 is called on it,
@@ -773,17 +791,17 @@ would be contradictory.
 
 \subsubsection{Calculation}
 
-Our inductive calculation of \lite ,
+Our inductive calculation of \lite,
 begins in the same way
 \begin{align*}
 	&exec\ (comp'\ (Lite\ x\ y\ z)\ c)\ s \\
 	&= \{specification\ (2) \} \\
 	&exec\ c\ (eval\ (Lite\ x\ y\ z) : s) \\
 	&= \{definition\ of\ eval\} \\
-	&exec\ c\ (if\ eval\ x\ \not= 0 \ then\ eval\ y\ else\ eval\ z : s)
+	&exec\ c\ (if\ eval\ x\ \not= 0\ then\ eval\ y\ else\ eval\ z : s)
 \end{align*}
 
-Like with \ite our calculation halts here,
+Like with \ite\ our calculation halts here,
 our aim with this time is that, again by using
 the expression $x$ as our condition,
 rather than deciding upon what value throw away
@@ -792,13 +810,13 @@ containing code of the complied $y$ and $z$ expressions.
 
 	\[ LITE :: Code \rightarrow Code \rightarrow Code \]
 	\[ exec\ (LITE\ ct\ ce)\ (eval\ x:s) 
-	= exec\ c\ (if\ eval\ x\ \not= 0 \ then\ eval\ y\ else\ eval\ z : s \]
+	= exec\ c\ (if\ eval\ x\ \not= 0\ then\ eval\ y\ else\ eval\ z : s) \]
 
 We cannot use this equation as a definition of exec 
-because $c, \ y$ and $z$ are unbound in the 
+because $c,\ y$ and $z$ are unbound in the 
 body of the expression\cite[page 10]{bandh}.
 However we can bind them in $ct$ and $ce$.
-The compile function \compp requires that any code is followed by
+The compile function \compp\ requires that any code is followed by
 more code (unless it is a HALT),
 so not only do  $ct$ and $ce$ contain the code for expressions
  $y$ and $z$ but also the continuation code $c$
@@ -816,17 +834,17 @@ In summary our generalised formal partial specification is
 which makes the rest of our calculation straightforward
 
 \begin{align*}
-	&exec\ c\ (if\ eval\ x\ \not= 0 \ then\ eval\ y\ else\ eval\ z : s) \\
+	&exec\ c\ (if\ eval\ x\ \not= 0\ then\ eval\ y\ else\ eval\ z : s) \\
 	&= \{definition\ of\ exec\} \\
 	&exec\ (LITE\ (comp'\ y\ c)\ (comp'\ z\ c) )\ (eval\ x : s) \\
 	&= \{induction\ hypothesis\ for\ x\} \\
-	&exec\ (comp'\ x ((LITE\ (comp'\ y\ c)\ (comp'\ z\ c)))\ s
+	&exec\ (comp'\ x\ ((LITE\ (comp'\ y\ c)\ (comp'\ z\ c)))\ s
 \end{align*}
 
 From which we may deduce 
 
 	\[ comp'\ (Lite\ x\ y\ z)\ c 
-		= comp'\ x ((LITE\ (comp'\ y\ c)\ (comp'\ z\ c))) \]
+		= comp'\ x\ (LITE\ (comp'\ y\ c)\ (comp'\ z\ c)) \]
 
 This method poses a problem;
 on the right hand side of this equation,
@@ -838,7 +856,7 @@ where $n$ is the number of \lite\ expressions.
 Surely there must be a way to avoid this.
 
 The problem comes from the double use of $c$,
-at the moment this is necessary because \compp
+at the moment this is necessary because \compp\
 takes an \expr\ and \code\ as arguments and is in
 each branch of code,
 however they could instead \emph{share}
@@ -849,121 +867,134 @@ to be compiled without continuation code of it's own,
 unlike \compp, also LITE would need 3 code arguments in
 it's constructor and we would need a way of 
 reuniting the condition's code back with the rest of the code $c$
-as $:\ cons$ would not work
-
-\subsubsection*{Testing}
+as~$``:\ cons''$ would not work.
 
 \begin{eqnarray*}
-	f\ (Lite\ x\ y\ z)\ c &=& f'\ x ((LITE\ (f\ y)\ (f\ z)\ c)) \\
-	exec\ (LITE\ (f\ y)\ (f\ z)\ c) (k : s) 
-	&=& exec\ ((if \not=0 \ then\ (f\ y)\ else\ (f\ z)) : c)\ s 
+f\ (Lite\ x\ y\ z)\ c &=& f'\ x\ (LITE\ (f\ y)\ (f\ z)\ c) \\
+exec\ (LITE\ (f\ y)\ (f\ z)\ c) (k : s) 
+&=& exec\ ((if \not=0\ then\ (f\ y)\ else\ (f\ z)) : c)\ s 
 \end{eqnarray*}
 
 But this is an optimisation problem out of the scope of this dissertation.
 
-%%$f$ would satisfy the equation
-%%
-%%\[ f \ (Lite \ x \ y \ z) \ c = comp' \ x ((FLITE \ (komp \ y) \ (komp \ z) c)) \]
-%%
-%%where FLITE has 3 \code arguments
-%%and $komp e$ compiles $e$ without need of a continuation
-%%FLITE :: Code \rightarrow Code \rightarrow Code \rightarrow Code 
-%%
-%%We cannot simply use \comp because it attaches an unwanted
-%%HALT instruction onto the end of the code of both brances
-%%
-%%\(comp' \ x (LITE \ (comp \ y) \ (comp \ z) c) = PUSH \ 1 \ (LITE \ (PUSH \ 1 \ HALT) (PUSH \ 1 \ HALT))\)
-%%
-%%which would stop further execution of code
-%%but because everything is type correct
-%%
-%%\(exec HALT c
+In summary, we have discovered the following 
+definitions for the compiler and \vm.
+
+\begin{eqnarray}
+&comp'\ (Lite\ x\ y\ z)\ c \nonumber \\
+	&= comp'\ x\ (LITE\ (comp'\ y\ c)\ (comp'\ z\ c)) \label{complite} \\
+&exec\ (LITE\ ct\ ce)\ (eval\ x:s) \nonumber \\
+	&= exec\ c\ (if\ eval\ x\ \not= 0\ then\ eval\ y\ else\ eval\ z : s) \label{execlite}
+\end{eqnarray}
+
+\subsubsection{Testing}
 
 To test our definitions we can use the Haskell compiler
 to compile and execute an example \lite expression,
 which will be the same expression as we used
 on it's the eager twin for comparison.
 
-	\[ exec \ (comp \ (Lite \ (Val \ 1) (Add \ (Val \ 2) (Val \ 3)) (Add \ (Val \ 4) (Val \ 5))))) \]
+\[ exec\ (comp\ (Lite\ (Val\ 1)\
+		 (Add\ (Val\ 2)\ (Val\ 3))\ 
+		(Add\ (Val\ 4)\ (Val\ 5)))))\ [\, ] \]
 
-the result of comp: 
-\begin{align*}	
-	&comp \ (Lite \ (Val \ 1) (Add \ (Val \ 2) (Val \ 3)) (Add \ (Val \ 4) (Val \ 5))) \\
-	&= PUSH \ 1 \ (LITE \ (PUSH \ 2 \ (PUSH \ 3 \ (ADD \ HALT))) (PUSH \ 4 \ (PUSH \ 5 (ADD \ HALT))))
-\end{align*}
-
-\begin{eqnarray}
-	comp' \ (Lite \ x \ y \ z) \ c &=& comp' \ x (LITE \ (comp' \ y \ c) \ (comp' \ z \ c)) \\
-	comp' \ (Add \ x \ y) \ c     &=&  comp' x (comp' y (ADD c)) \\
-	comp' \ (Val \ n) \ c         &=&  PUSH \ n \ c
-\end{eqnarray}
+\subsubsection{Compilation}
 
 Compiling by hand:
 \begin{align*}	
-	&comp \ (Lite \ (Val \ 1) (Add \ (Val \ 2) (Val \ 3)) (Add \ (Val \ 4) (Val \ 5))) \\
-	&= \{ definition \ of \ comp \ followed \ by \ equation \ 7 \ \} \\
-	&comp' \ (Val \ 1) (LITE \ (comp' \ (Add \ (Val \ 2) (Val \ 3)) \ HALT) \ (comp' \ (Add \ (Val \ 4) (Val \ 5)))) \\
-	&= \{ equation\ 9 \} \\
-	&PUSH\ 1 \ (LITE \ (comp' \ (Add \ (Val \ 2) (Val \ 3)) \ HALT) \ (comp' \ (Add \ (Val \ 4) (Val \ 5)))) \\
-	&= \{ equation \ 8 \ twice \} \\
-	&PUSH\ 1\ (LITE \ ( comp' (Val \ 2) (comp' (Val \ 3) (ADD \ HALT)) \ (comp' (Val \ 4) (comp' (Val \ 5) (ADD \ HALT)))) \\
-	&= \{ equation \ 9 \ four \ times \} \\
-	&PUSH \ 1 \ (LITE \ (PUSH \ 2 \ (PUSH \ 3 \ (ADD \ HALT))) (PUSH \ 4 \ (PUSH \ 5 (ADD \ HALT))))
+&comp\ (Lite\ (Val\ 1)\ (Add\ (Val\ 2)\ (Val\ 3))\ (Add\ (Val\ 4) (Val\ 5))) \\
+&= \{ definition\ of\ comp\ followed\ by\ equation\ \ref{complite}\ \} \\
+&comp'\ (Val\ 1) (LITE\ (comp'\ (Add\ (Val\ 2)\ (Val\ 3))\ HALT)\ (comp'\  (Add\ (Val\ 4)\ (Val\ 5)))) \\
+&= \{ equation\ \ref{compval}, \ref{compadd} \} \\
+&PUSH\ 1\ (LITE\ (comp'\ (Add\ (Val\ 2)\ (Val\ 3))\ HALT)\ (comp'\ (Add\ (Val\ 4)\ (Val\ 5)))) \\
+&= \{ equation\ 8\ twice \} \\
+&PUSH\ 1\ (LITE\ (comp'\ (Val\ 2)\ (comp'\ (Val\ 3)\ (ADD\ HALT))\ (comp'\  (Val\ 4)\ (comp'\ (Val\ 5)\ (ADD\ HALT)))) \\
+&= \{ equation\ 9\ four\ times \} \\
+&PUSH\ 1\ (LITE\ (PUSH\ 2\ (PUSH\ 3\ (ADD\ HALT))) (PUSH\ 4\ (PUSH\ 5 (ADD\ HALT))))
 \end{align*}
 
-So yet again, the expression has compiled correctly.
+Using the compile function \comp\ on this expression 
+in the Haskell implementation yields the same result:
 
-the result of exec: [5]
+\begin{align*}	
+&comp\ (Lite\ (Val\ 1)\
+		 (Add\ (Val\ 2)\ (Val\ 3))\ 
+		(Add\ (Val\ 4)\ (Val\ 5)))) \\
+&= PUSH\ 1\ (LITE\ 
+		(PUSH\ 2\ (PUSH\ 3\ 
+		(ADD\ HALT))) 
+		(PUSH\ 4\ (PUSH\ 5 (ADD\ HALT))))
+\end{align*}
 
-Which agrees with the interpretation of the expression:
+\subsubsection{Execution}
 
-	\[ eval \ (Lite \ (Val \ 1) (Add \ (Val \ 2) (Val \ 3)) (Add \ (Val \ 4) (Val \ 5)))  = 5\]
-
-So we can move onto checking the execution by hand
-
-\begin{eqnarray}
-	exec \  (LITE \ ct \ ce) \ (k:s) &=&  exec (if \ k \ \not= 0 \ then \ ct \ else \ ce) \ s \\
-	exec \ (PUSH \ n \ c) s         &=&  exec \ c \ (n:s) \\
-	exec \  (ADD \ c) \ s     &=&  exec \ c \ ((n+m) : s) 
-\end{eqnarray}
-%equation 7 and 8 here are repeats from before,
-% find a way to reset the numbering
+%\begin{eqnarray}
+%	exec\  (LITE\ ct\ ce)\ (k:s) &=&  exec (if\ k\ \not= 0\ then\ ct\ else\ ce)\ s \\
+%	exec\ (PUSH\ n\ c) s         &=&  exec\ c\ (n:s) \\
+%	exec\  (ADD\ c)\ s     &=&  exec\ c\ ((n+m) : s) 
+%\end{eqnarray}
 
 \begin{align*}
-	&exec \ (PUSH \ 1 \ (LITE \ (PUSH \ 2 \ (PUSH \ 3 \ (ADD \ HALT))) (PUSH \ 4 \ (PUSH \ 5 (ADD \ HALT))))) \ [] \\
-	&=\{equation \ 11 \} \\
-	&exec (LITE \ (PUSH \ 2 \ (PUSH \ 3 \ (ADD \ HALT))) (PUSH \ 4 \ (PUSH \ 5 (ADD \ HALT)))) \ [1] \\
-	&=\{equation \ 10 \} \\
-	&exec (PUSH \ 2 \ (PUSH \ 3 \ (ADD \ HALT))) \ [] \\
-	&=\{equation \ 11 \ twice \} \\
-	&exec (ADD \ HALT) \ [3, 2] \\
-	&=\{equation \ 12 \} \\
-	&exec \ HALT \ [5] \\
-	&= \{definition \ of \ exec \} \\
-	&[5]
+&exec\ (PUSH\ 1\ (LITE\ (PUSH\ 2\ (PUSH\ 3\ (ADD\ HALT))) (PUSH\ 4\ (PUSH\ 5 (ADD\ HALT)))))\ [\, ] \\
+&=\{equation\ \ref{execpush} \} \\
+&exec\ (LITE\ (PUSH\ 2\ (PUSH\ 3\ (ADD\ HALT))) (PUSH\ 4\ (PUSH\ 5 (ADD\ HALT))))\ [1] \\
+&=\{equation\ \ref{execlite} \} \\
+&exec\ (PUSH\ 2\ (PUSH\ 3\ (ADD\ HALT)))\ [\, ] \\
+&=\{equation\ \ref{execpush}\ twice \} \\
+&exec\ (ADD\ HALT)\ [3, 2] \\
+&=\{equation\ \ref{execadd} \} \\
+&exec\ HALT\ [5] \\
+&= \{equation\ \ref{exechalt}\} \\
+&[5]
 \end{align*}
 
+Using the Haskell implementation of the \vm.
+\begin{align*}	
+&exec\ (PUSH\ 1\ (LITE\ 
+	(PUSH\ 2\ (PUSH\ 3\ (ADD\ HALT))) 
+	(PUSH\ 4\ (PUSH\ 5 (ADD\ HALT))))) \\
+&= [5]
+\end{align*}
+
+\subsubsection{Interpretation}
+
+\begin{align*}
+&eval\ (Lite\ (Val\ 1) 
+		(Add\ (Val\ 2) (Val\ 3)) 
+		(Add\ (Val\ 4) (Val\ 5))) \\
+&= \{ equation\ \ref{evallite} \}
+&
+\end{align*}
+
+In the Haskell implementation of the
+interpreter:
+
+\[ eval\ (Lite\ (Val\ 1) (Add\ (Val\ 2) (Val\ 3)) (Add\ (Val\ 4) (Val\ 5)))  = 5\]
+
+
+Which agrees with the execution of the 
+compiled code of the expression.
+
+\subsubsection{Proof}
 
 Finally we come to proving our calculation.
 We aim to show that our definitions for \lite
 satisfy the specification
 
-	\[ exec \ c \ (eval \ (Lite \ x \ y \ z):s) = exec (comp' \ (Lite \ x \ y \ z) c)  \ s  \]
+\[ exec\ c\ (eval\ (Lite\ x\ y\ z):s) = exec (comp'\ (Lite\ x\ y\ z) c)\ s  \]
 
 \begin{align*}
-	&exec \ c \ (eval \ (Lite \ x \ y \ z):s) \\
-	&= \{ definition \ of \ eval \} \\
-	&exec \ c \ ((if \ eval \ x \ \not= 0 \ then \ eval \ y \ else \ eval \ z) :s) \\
-	&= \{ define\: exec \ (LITE \ (comp' \ x \ c) (comp' \ y \ c) (k : s) \\
-	&= exec \ (if \ k \not=0 \ then \ (comp' \ y \ c) \ else \ (comp' \ z \ c)) \ s \} \\
-	& exec \ (LITE \ (comp' \ y \ c) \ (comp' \ z \ c)) \ (eval \ x : s) \\
-	&= \{ definition \ of \ comp' \} \\
-	& exec \ (comp' \ x \ (LITE \ 
-							(comp' \ y \ c) \ 
-							(comp' \ z \ c))) \ s \\
-	&= \{definition \ of \ comp' \} \\
-	&= exec (comp' \ (Lite \ x \ y \ z) c)  \ s \\
-	QED
+&exec\ c\ (eval\ (Lite\ x\ y\ z):s) \\
+&= \{ definition\ of\ eval \} \\
+&exec\ c\ ((if\ eval\ x\ \not= 0\ then\ eval\ y\ else\ eval\ z) :s) \\
+&= \{ define\: exec\ (LITE\ (comp'\ x\ c) (comp'\ y\ c) (k : s) \\
+&= exec\ (if\ k \not=0\ then\ (comp'\ y\ c)\ else\ (comp'\ z\ c))\ s \} \\
+& exec\ (LITE\ (comp'\ y\ c)\ (comp'\ z\ c))\ (eval\ x : s) \\
+&= \{ definition\ of\ comp' \} \\
+& exec\ (comp'\ x\ (LITE\ (comp'\ y\ c)\ (comp'\ z\ c)))\ s \\
+&= \{definition\ of\ comp' \} \\
+&= exec (comp'\ (Lite\ x\ y\ z) c)\ s \\
+QED
 \end{align*}
 
 \subsection{Summary}
@@ -972,12 +1003,12 @@ In conclusion we have calculated the following definitions
 												\cite[page 11]{bandh}:
 
 \begin{eqnarray*}
-	&\textbf{data} \ Code &= ...ITE\ Code | LITE\ Code\ Code \\
+	&\textbf{data}\ Code &= ...ITE\ Code | LITE\ Code\ Code \\
 	&comp 				  &:: Expr \rightarrow Code \\
 	&comp\ x			  &= comp'\ x\ HALT \\
 	&comp'				  &:: Expr \rightarrow Code \rightarrow Code \\
 	&comp'\ (Ite\ x\ y\ z) 
-				&= comp'\ z\ (comp' \ y\ (comp' \ x\ (ITE c))) \\
+				&= comp'\ z\ (comp'\ y\ (comp'\ x\ (ITE c))) \\
 	&comp'\ (Lite\ x\ y\ z) 
 				&= comp'\ x\ (LITE\ (comp'\ y\ c)\ (comp'\ z\ c)) \\
 	&exec\ (ITE\ c)\ (k:m:n:s) 
@@ -1067,14 +1098,14 @@ lexical analysis, we need to use
 abstract syntax, and our constructor
 for it
 
-	\[ \textbf{data} \ Expr = ... |\ Let \ String \ Expr \ Expr \]
+	\[ \textbf{data}\ Expr = ... |\ Let\ String\ Expr\ Expr \]
 
 \lets\ creates a new binding,
 by pushing the String-Int pair
 onto the \env, to reference a variable we will
 use a ``Var'' constructor
 
-\[ \textbf{data} \ Expr = ... |\ Var \ String \]
+\[ \textbf{data}\ Expr = ... |\ Var\ String \]
 
 The String is taken directly from the source
 String part of the \lets\ expression,
@@ -1087,7 +1118,7 @@ Therefore our semantics of \lets\ and \var\
 &eval\ (Let\ v\ x\ y)\ bs &= eval\ y\ ((v,\ eval\ x\ bs):bs) \\
 &eval\ (Var\ v)\ bs		    &=   valueOf\ v\ bs  \\
 &valueOf\ &:: String \rightarrow Env \rightarrow Int \\
-&valueOf \ s \ [\, ]\ &= error\ ``Binding\ out\ of\ scope?" \\
+&valueOf\ s\ [\, ]\ &= error\ ``Binding\ out\ of\ scope?" \\
 &valueOf\ s\ ((v,\ n):bs) &= if\ s == v\ then\ n\ else\ valueOf\ s\ bs
 \end{eqnarray*}
 
@@ -1150,8 +1181,8 @@ Step 2: Define equations that specify the
 
 Our compiler specifications have been:
 
-	\[ exec \  (comp \  x) \  s = eval \  x:s \]
-	\[ exec \  (comp' \  x \  c) \ s = exec \  c \  (eval \, x:s) \]
+	\[ exec\  (comp\  x)\  s = eval\  x:s \]
+	\[ exec\  (comp'\  x\  c)\ s = exec\  c\  (eval \, x:s) \]
 
 However, these no longer hold
 because our eval function has changed
@@ -1413,5 +1444,5 @@ From this we conclude
 
 
 \bibliographystyle{IEEEtran}
-\bibliography{calcob}
+\bibliography{Finalproject}
 \end{document}
