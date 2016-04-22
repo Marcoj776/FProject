@@ -34,19 +34,12 @@ exec (ITE c) (k:m:n:s)=   exec c ((if k /= 0 then m else n) : s)
 
 ----TESTS-----
 if1 = comp(Ite (Val 1) (Add (Val 2) (Val 3)) (Add (Val 4) (Val 5)))
---PUSH 4 (PUSH 5 (ADD (PUSH 2 (PUSH 3 (ADD (PUSH 1 (ITE HALT)))))))
 if2 = exec (comp(Ite (Val 1) (Add (Val 2) (Val 3)) (Add (Val 4) (Val 5)))) []
---[5]
 if3 =  eval (Ite (Val 1) (Add(Val 2)(Val 3)) (Add(Val 4)(Val 5)))
---5
 
 if4 = comp(Ite (Val 0) (Add (Val 2) (Val 3)) (Add (Val 4) (Val 5)))
---PUSH 4 (PUSH 5 (ADD (PUSH 2 (PUSH 3 (ADD (PUSH 0 (ITE HALT)))))))
 if2 = exec (comp(Ite (Val 0) (Add (Val 2) (Val 3)) (Add (Val 4) (Val 5)))) []
---[5]
 if3 =  eval (Ite (Val 0) (Add(Val 2)(Val 3)) (Add(Val 4)(Val 5)))
---5
-
 
 
 
