@@ -2,6 +2,8 @@ module Arith where
 
 type Stack = [Int]
 type Env   = [(String, Int)]
+type Fun   = [(String, Args)]
+type Args  = [String]
 
 data Expr = Val Int | 
 			Add Expr Expr |
@@ -9,19 +11,23 @@ data Expr = Val Int |
 			Lte Expr Expr |
 			Ite Expr Expr Expr |
 			Lite Expr Expr Expr |
-			Let String Expr Expr | Var String
+			LetVar String Expr Expr | Var String |
+			LetFun String Args Expr | App String Args
 			deriving (Eq, Show, Read)
 			
 			
-eval              	   	::  Expr -> Env -> Fun -> Int
-eval (Val n) bs 		=   n
-eval (Add x y) bs 		=   eval x bs + eval y bs
-eval (Gte x y) bs		=	if eval x bs >= eval y bs then 1 else 0
-eval (Lte x y) bs 		=	if eval x bs <= eval y bs then 1 else 0
-eval (Ite x y z) bs		=   if eval x bs /= 0 then eval y bs else eval z bs
-eval (Lite x y z) bs 	=   if eval x bs /= 0 then eval y bs else eval z bs
-eval (Let v x y) bs 	=   eval y ((v, eval x bs):bs) 
-eval (Var v) bs		   	=   valueOf v bs 
+eval              	   		::  Expr -> Env -> Fun -> Int
+eval (Val n) bs fs			=   n
+eval (Add x y) bs fs		=   eval x bs + eval y bs
+eval (Gte x y) bs fs		=	if eval x bs >= eval y bs then 1 else 0
+eval (Lte x y) bs fs		=	if eval x bs <= eval y bs then 1 else 0
+eval (Ite x y z) bs	fs		=   if eval x bs /= 0 then eval y bs else eval z bs
+eval (Lite x y z) bs fs		=   if eval x bs /= 0 then eval y bs else eval z bs
+eval (LetVar v x y) bs fs	=   eval y ((v, eval x bs):bs) fs
+eval (Var v) bs	fs	   		=   valueOf v bs fs
+eval (LetFun f a y) bs fs	=	eval y bs ((f, [args]):fs)
+									where args
+eval (App f a) bs fs		= 	
 
 --Auxillary function for retrieving value of a Var
 valueOf :: String -> Env -> Int
@@ -51,7 +57,7 @@ comp' (Lte x y) cxt c     =   comp' y cxt (comp' x cxt (LTE c))
 comp' (Ite x y z) cxt c   =   comp' z cxt (comp' y  cxt (comp' x cxt (ITE c)))
 comp' (Lite x y z) cxt c  =   comp' x cxt (LITE (comp' y cxt c) (comp' z cxt c))
 --
-comp' (Let v x y) cxt c	  =   comp' x cxt (LET (comp' y (v:cxt) (TEL c)))
+comp' (LetVar v x y) cxt c   =   comp' x cxt (LET (comp' y (v:cxt) (TEL c)))
 comp' (Var v) cxt c       =   VAR (posOf v cxt) c
 
 --Auxillary function for retrieving position of a Var from the context stack

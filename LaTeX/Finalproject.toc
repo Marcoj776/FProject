@@ -1,30 +1,36 @@
 \contentsline {section}{\numberline {1}Introduction}{2}
-\contentsline {subsection}{\numberline {1.1}Aims and methodology}{2}
-\contentsline {subsection}{\numberline {1.2}Roadmap}{3}
-\contentsline {section}{\numberline {2}A review of the Bahr and Hutton method}{3}
-\contentsline {subsection}{\numberline {2.1}Example calculations}{5}
-\contentsline {subsection}{\numberline {2.2}Testing Add and Val expressions}{8}
-\contentsline {subsubsection}{\numberline {2.2.1}Compilation}{9}
-\contentsline {subsubsection}{\numberline {2.2.2}Execution}{9}
-\contentsline {subsubsection}{\numberline {2.2.3}Interpretation}{9}
-\contentsline {section}{\numberline {3}Conditionals, $L_c$}{10}
-\contentsline {subsection}{\numberline {3.1}Calculation}{11}
-\contentsline {subsection}{\numberline {3.2}Testing}{12}
-\contentsline {subsubsection}{\numberline {3.2.1}Compilation}{13}
-\contentsline {subsubsection}{\numberline {3.2.2}Execution}{13}
-\contentsline {subsubsection}{\numberline {3.2.3}Interpretation}{14}
-\contentsline {subsection}{\numberline {3.3}Lazy evaluation}{14}
-\contentsline {subsubsection}{\numberline {3.3.1}Calculation}{14}
-\contentsline {subsubsection}{\numberline {3.3.2}Testing}{16}
-\contentsline {subsubsection}{\numberline {3.3.3}Compilation}{16}
-\contentsline {subsubsection}{\numberline {3.3.4}Execution}{17}
-\contentsline {subsubsection}{\numberline {3.3.5}Interpretation}{17}
-\contentsline {subsubsection}{\numberline {3.3.6}Proof}{17}
-\contentsline {subsection}{\numberline {3.4}Summary}{18}
-\contentsline {section}{\numberline {4}Bindings, $L_b$}{18}
-\contentsline {subsection}{\numberline {4.1}Semantics}{19}
-\contentsline {subsection}{\numberline {4.2}Compiler Correctness}{20}
-\contentsline {subsection}{\numberline {4.3}Calculation}{22}
-\contentsline {subsection}{\numberline {4.4}Testing}{24}
-\contentsline {section}{\numberline {5}Function definition, $L_f$}{24}
-\contentsline {section}{\numberline {6}Automated Testing}{24}
+\contentsline {subsection}{\numberline {1.1}Aims and methodology}{3}
+\contentsline {subsection}{\numberline {1.2}Roadmap}{4}
+\contentsline {section}{\numberline {2}A review of the Bahr and Hutton method}{5}
+\contentsline {subsection}{\numberline {2.1}Values and addition}{5}
+\contentsline {subsection}{\numberline {2.2}Calculations}{6}
+\contentsline {subsubsection}{\numberline {2.2.1}Values}{7}
+\contentsline {subsubsection}{\numberline {2.2.2}Addition}{8}
+\contentsline {subsection}{\numberline {2.3}Testing}{10}
+\contentsline {subsubsection}{\numberline {2.3.1}Compilation}{10}
+\contentsline {subsubsection}{\numberline {2.3.2}Execution}{11}
+\contentsline {subsubsection}{\numberline {2.3.3}Interpretation}{12}
+\contentsline {subsection}{\numberline {2.4}Summary}{12}
+\contentsline {section}{\numberline {3}Conditionals, $L_c$}{14}
+\contentsline {subsection}{\numberline {3.1}Calculation}{14}
+\contentsline {subsection}{\numberline {3.2}Testing}{16}
+\contentsline {subsubsection}{\numberline {3.2.1}Compilation}{17}
+\contentsline {subsubsection}{\numberline {3.2.2}Execution}{18}
+\contentsline {subsubsection}{\numberline {3.2.3}Interpretation}{19}
+\contentsline {subsection}{\numberline {3.3}Summary}{19}
+\contentsline {subsection}{\numberline {3.4}Lazy evaluation}{21}
+\contentsline {subsubsection}{\numberline {3.4.1}Calculation}{21}
+\contentsline {subsubsection}{\numberline {3.4.2}Testing}{22}
+\contentsline {subsubsection}{\numberline {3.4.3}Compilation}{23}
+\contentsline {subsubsection}{\numberline {3.4.4}Execution}{23}
+\contentsline {subsubsection}{\numberline {3.4.5}Interpretation}{24}
+\contentsline {subsubsection}{\numberline {3.4.6}Proof}{24}
+\contentsline {subsection}{\numberline {3.5}Summary}{24}
+\contentsline {section}{\numberline {4}Bindings, $L_b$}{26}
+\contentsline {subsection}{\numberline {4.1}Semantics}{26}
+\contentsline {subsection}{\numberline {4.2}Compiler Correctness}{27}
+\contentsline {subsection}{\numberline {4.3}Calculation}{29}
+\contentsline {subsection}{\numberline {4.4}Testing}{31}
+\contentsline {section}{\numberline {5}Function definition, $L_f$}{32}
+\contentsline {section}{\numberline {6}Automated testing and calculation checking}{33}
+\contentsline {section}{\numberline {7}Conclusion}{34}

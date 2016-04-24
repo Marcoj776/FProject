@@ -21,6 +21,14 @@
 \providecommand{\BIBdecl}{\relax}
 \BIBdecl
 
+\bibitem{compilers}
+R.~Hunter, \emph{COMPILERS: Their Design and Construction Using Pascal}.\hskip
+  1em plus 0.5em minus 0.4em\relax John Wiley and Sons, Ltd, 1985.
+
+\bibitem{meijer}
+E.~Meijer, ``Calculating compilers,'' Ph.D. dissertation, Katholieke
+  Universiteit Nijmegen, 1992.
+
 \bibitem{bandh}
 P.~Bahr and G.~Hutton, ``Calculating correct compilers,'' \emph{Journal of
   Functional Programming}, 2015.

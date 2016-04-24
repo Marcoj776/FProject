@@ -1,9 +1,7 @@
 module Arith where
 
 type Stack = [Int]
-type Env = [(String, Int)]
-type Args = [String]
-type Funcs = [(String, Args)]
+type Env   = [(String, Int)]
 
 data Expr = Val Int | 
 			Add Expr Expr |
@@ -11,26 +9,24 @@ data Expr = Val Int |
 			Lte Expr Expr |
 			Ite Expr Expr Expr |
 			Lite Expr Expr Expr |
-			Let String Expr Expr | Var String |
-			Def String String Expr Expr |
-			Fun String Args
+			Let String Expr Expr | Var String
 			deriving (Eq, Show, Read)
---make first argument of Let a String, requires a lot of refactoring
 			
-eval              	   	::  Expr -> Env -> Int
+			
+eval              	   	::  Expr -> Env -> Fun -> Int
 eval (Val n) bs 		=   n
-eval (Add x y) bs		=   eval x bs + eval y bs
-eval (Gte x y) bs 		=	if eval x bs >= eval y bs then 1 else 0
+eval (Add x y) bs 		=   eval x bs + eval y bs
+eval (Gte x y) bs		=	if eval x bs >= eval y bs then 1 else 0
 eval (Lte x y) bs 		=	if eval x bs <= eval y bs then 1 else 0
 eval (Ite x y z) bs		=   if eval x bs /= 0 then eval y bs else eval z bs
 eval (Lite x y z) bs 	=   if eval x bs /= 0 then eval y bs else eval z bs
-eval (Let v x y) bs		=   eval y ((v, eval x bs):bs)
-eval (Var v) bs		    =   valueOf v bs
+eval (Let v x y) bs 	=   eval y ((v, eval x bs):bs) 
+eval (Var v) bs		   	=   valueOf v bs 
 
 --Auxillary function for retrieving value of a Var
 valueOf :: String -> Env -> Int
-valueOf s [] = error "Binding out of scope?"
-valueOf s ((v, n):bs) = if s == v then n else valueOf s bs
+valueOf s ([], _ ) = error "Binding out of scope?"
+valueOf s ((v, n):bs, _ ) = if s == v then n else valueOf s bs
 --
 
 data Code             =   HALT | PUSH Int Code | ADD Code |
@@ -55,7 +51,7 @@ comp' (Lte x y) cxt c     =   comp' y cxt (comp' x cxt (LTE c))
 comp' (Ite x y z) cxt c   =   comp' z cxt (comp' y  cxt (comp' x cxt (ITE c)))
 comp' (Lite x y z) cxt c  =   comp' x cxt (LITE (comp' y cxt c) (comp' z cxt c))
 --
-comp' (Let v x y) cxt c   =   comp' x cxt (LET (comp' y (v:cxt) (TEL c)))
+comp' (Let v x y) cxt c	  =   comp' x cxt (LET (comp' y (v:cxt) (TEL c)))
 comp' (Var v) cxt c       =   VAR (posOf v cxt) c
 
 --Auxillary function for retrieving position of a Var from the context stack
@@ -83,42 +79,24 @@ exec (VAR n c)  ( s, vs)       =   exec c (((vs!!n):s), vs) -- put value of n on
 --
 
 ----TESTS-----
-ift = exec (comp(Ite (Val 1)(Add (Val 1) (Val 0))(Add (Val 1) (Val 1))))([],[])
-iff = exec (comp(Ite (Val 0)(Add (Val 1) (Val 0))(Add (Val 1) (Val 1))))([],[])
-lift = comp(Lite (Val 1) (Add (Val 1) (Val 0)) (Add (Val 1) (Val 1)))
-liff = exec (comp(Lite (Val 0) (Add (Val 1) (Val 0)) (Add (Val 1) (Val 1))))	([],[])
--- [1][2][1][2] as expected
-evff = eval (Let "x" (Val 1)
-				(Add (Var "y") (Val 2))) []
-evvl = eval (Let "x" (Let "b" (Val 2) 
-						(Add (Var "b") (Val 2)))
-				(Let "y" (Var "x") 
-					(Add (Var "y") (Val 2)))) []
-evffl = eval (Let "x" (Val 1) 
-				(Let "y" (Var "x") 
-					(Add (Var "Z") (Val 2)))) []
 
 --Enforces correctness of induction hypithesis
 calc :: String -> Expr -> Expr -> Context -> Code -> Memory -> [Memory]
 calc v x y cxt c (s,vs) =
   [
-    exec (comp' (Let v x y) cxt c) (s, vs)
+    exec (comp' (LetVar v x y) cxt c) (s, vs)
   , {-The induction hypothesis holds-}
-    exec c ((eval (Let v x y) (zip cxt vs)):s, vs)
+    exec c ((eval (LetVar v x y) (zip cxt vs)):s, vs)
 	-- (zip cxt vs) is of type Env
   ]
 --
 
-ex = Add (Val 1) (Val 2)
-wy = Add (Var "v") (Val 3)
-onelet = calc "v" ex wy [] HALT ([],[])
-letex = Let "x" (Val 3) (Add (Var "x") (Val 3))
-twolet = calc "v" letex wy [] HALT ([],[])
---need to auto test this
 
-posv = comp' (Var "v") ["v"] (comp' (Var "x") ["v", "y", "x"] HALT)
--- ["v"] is cxt which is Context
-tel = comp (Let "v" (Val 1) (Add (Val 2) (Var "v")))
+
+
+
+
+
 
 
 

@@ -10,10 +10,8 @@ data Expr = Val Int |
 			Lte Expr Expr |
 			Ite Expr Expr Expr |
 			Lite Expr Expr Expr |
-			Let String Expr Expr | Var String |
-			Def String 
+			Let String Expr Expr | Var String
 			deriving (Eq, Show, Read)
---make first argument of Let a String, requires a lot of refactoring
 			
 eval              	   	::  Expr -> Env -> Int
 eval (Val n) bs 		=   n
@@ -94,18 +92,6 @@ calc v x y cxt c (s,vs) =
   ]
 --
 
-ex = Add (Val 1) (Val 2)
-wy = Add (Var "v") (Val 3)
-onelet = calc "v" ex wy [] HALT ([],[])
-letex = Let "x" (Val 3) (Add (Var "x") (Val 3))
-twolet = calc "v" letex wy [] HALT ([],[])
---need to auto test this
-
-posv = comp' (Var "v") ["v"] (comp' (Var "x") ["v", "y", "x"] HALT)
--- ["v"] is cxt which is Context
-tel = comp (Let "v" (Val 1) (Add (Val 2) (Var "v")))
-
-
 instance Serial Expr where
   series  =  const (drawnFrom [Val 1, Val 2]) \/
 				cons2 Add \/
@@ -128,9 +114,15 @@ wellScopedIn cxt (Lite e1 e2 e3) = wellScopedIn cxt e1 && wellScopedIn cxt e2 &&
 wellScopedIn cxt (Let e1 e2 e3) = wellScopedIn (e1:cxt) e2 && wellScopedIn (e1:cxt) e3
 wellScopedIn (v:cxt) (Var e) = if e == v then True else wellScopedIn cxt (Var e)
 
-
 prop_evalCompExec :: Expr -> Bool
 prop_evalCompExec e  =  wellScoped e ==> (eval e ([],[])) == exec (comp e ([],[]))
+
+
+
+
+
+
+
 
 
 
