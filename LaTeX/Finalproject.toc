@@ -12,7 +12,7 @@
 \contentsline {subsubsection}{\numberline {2.3.3}Interpretation}{12}
 \contentsline {subsection}{\numberline {2.4}Summary}{12}
 \contentsline {section}{\numberline {3}Conditionals, $L_c$}{14}
-\contentsline {subsection}{\numberline {3.1}Calculation}{14}
+\contentsline {subsection}{\numberline {3.1}Calculation}{15}
 \contentsline {subsection}{\numberline {3.2}Testing}{16}
 \contentsline {subsubsection}{\numberline {3.2.1}Compilation}{17}
 \contentsline {subsubsection}{\numberline {3.2.2}Execution}{18}
@@ -20,12 +20,12 @@
 \contentsline {subsection}{\numberline {3.3}Summary}{19}
 \contentsline {subsection}{\numberline {3.4}Lazy evaluation}{21}
 \contentsline {subsubsection}{\numberline {3.4.1}Calculation}{21}
-\contentsline {subsubsection}{\numberline {3.4.2}Testing}{22}
+\contentsline {subsubsection}{\numberline {3.4.2}Testing}{23}
 \contentsline {subsubsection}{\numberline {3.4.3}Compilation}{23}
-\contentsline {subsubsection}{\numberline {3.4.4}Execution}{23}
+\contentsline {subsubsection}{\numberline {3.4.4}Execution}{24}
 \contentsline {subsubsection}{\numberline {3.4.5}Interpretation}{24}
 \contentsline {subsubsection}{\numberline {3.4.6}Proof}{24}
-\contentsline {subsection}{\numberline {3.5}Summary}{24}
+\contentsline {subsection}{\numberline {3.5}Summary}{25}
 \contentsline {section}{\numberline {4}Bindings, $L_b$}{26}
 \contentsline {subsection}{\numberline {4.1}Semantics}{26}
 \contentsline {subsection}{\numberline {4.2}Compiler Correctness}{27}

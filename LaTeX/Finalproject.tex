@@ -246,6 +246,7 @@ arguments are manipulated.
 \newcommand{\evalf}{\mathit{eval\ }}
 \newcommand{\Expr}{\mathit{Expr\ }}
 \newcommand{\Int}{\mathit{Int\ }}
+\newcommand{\Code}{\mathit{Code\ }}
 
 \subsection{Values and addition}
 
@@ -403,7 +404,7 @@ and $c$ as arguments we can bind them both\cite[bottom of page 9]{bandh}
 \newcommand{\PUSHt}{\textit{PUSH\ }}
 \newcommand{\PUSH}{\mathit{PUSH\ }}
 \begin{eqnarray}
-\PUSH &::& Int \rightarrow Code \rightarrow Code \nonumber \\
+\PUSH &::& \Int \rightarrow \Code \rightarrow \Code \nonumber \\
 \Exec (\PUSH n\ c)\ s &=& \Exec c\ (n :s) \label{execpush}
 \end{eqnarray}
 
@@ -511,7 +512,7 @@ So we define ADD that
 when executed, adds the top two stack elements
 together and leaves the result on top of the stack.
 \begin{eqnarray}
-ADD &::& Code \rightarrow Code \nonumber \\
+\ADD &::& \Code \rightarrow \Code \nonumber \\
 \Exec (\ADD c)\ (m:n:s) &=& \Exec c\ (n+m:s)
 \end{eqnarray}
 
@@ -772,7 +773,9 @@ the addition operation that \BH\ derived.
 \newcommand{\String}{\mathit{String\ }}
 
 Step 1: 
+\begin{quote}
 ``define an evaluation function in a compositional manner''.
+\end{quote}
 The evaluation function remains 
 the same as before,
 but we need to define 
@@ -819,7 +822,10 @@ it's arguments so
 calculations about \ite\ expressions
 will be \emph{inductive}.
 
-step 2: ``Define equations that specify the correctness of the compiler''.
+step 2: 
+\begin{quote}
+``Define equations that specify the correctness of the compiler''.
+\end{quote}
 The \exec\ and \comp\ functions still take the same
 type of arguments as before,
 so there is no need to update the specifications yet
@@ -871,7 +877,7 @@ Our code constructor to solve this will be
 \newcommand{\ITEt}{\textit{ITE\ }}
 \newcommand{\ITE}{\mathit{ITE\ }}
 
-	\[ ITE :: Code \rightarrow Code \]
+	\[ \ITE :: \Code \rightarrow \Code \]
 
 and it's definition for the \vm
 
@@ -925,7 +931,7 @@ execution rule only differs by the Haskell
 code to perform the operation.
 
 
-\subsection{Testing}
+\subsection{Testing}\label{itetests}
 
 For the testing, the example \ite\ expression $\beta$ will be used, where:
 
@@ -1101,74 +1107,98 @@ whereby all arguments are evaluated
 and therefore also compiled and executed.
 
 This kind of evaluation of the condition
-is eager; in that both cases regardless of the
-condition's result, are compiled and executed
-while only one branch of code needs to be.
-This can avoided at if we can instead
-evaluate the condition at compile time
-and throw away the code for the case
-that we don't need to execute.
+is eager; in that both cases are compiled and executed
+while only one piece of code needs to be.
+This can avoided at if we instead
+separate the code for
+\( \Compp  y\ \mbox{ and } \Compp  z \) 
+into two separate branches
+and throw away the branch for the case
+that we don't need to execute, which
+is determined by the condition.
 
 \pagebreak
 \subsection{Lazy evaluation}
 
 \newcommand{\lite}{\textit{Lite}}
-
-Our ``Lazy if then else'' function
- will be called \lite.
-
-	\[ \textbf{data}\ Expr = ... | Lite\ \Expr \Expr Expr \]
-
-and it's semantics are
-
-\begin{equation}
-eval(Lite\ x\ y\ z) \\
-	= \ifff \evalf  x \not= 0 \tthen \evalf  y\ \eelse \evalf  z 
+\newcommand{\Lite}{\mathit{Lite\ }}
+First we define the semantics 
+in a compositional manner.
+The ``Lazy if then else'' function
+ will be called \lite, and it's semantics are:
+ \begin{eqnarray}
+ \textbf{data}\ \Expr &=& ...\ |\ \Lite \Expr \Expr \Expr \nonumber \\
+ \evalf (\Lite x\ y\ z)
+	&=& \ifff \evalf  x \not= 0 \tthen \evalf  y\ \eelse \evalf  z 
 			\label{evallite}
-\end{equation}
+ \end{eqnarray}
 
-Expressions cannot be lazily evaluated
-so \lite\ has the same semantics
-as an \ite\ expression,
+Expressions cannot be lazily evaluated,
 because lazy evaluation means evaluating
 something only when the evaluation function
 is called on it,
-so being able to lazily evaluate something 
+therefore being able to lazily evaluate something 
 by calling the evaluator on it,
 would be contradictory.
+Thus \lite\ has the same semantics
+as \ite.
 
 \subsubsection{Calculation}
 
-Our inductive calculation of \lite,
-begins in the same way
+Step 2:
+\begin{quote}
+``Define equations that specify the correctness of the compiler''
+\end{quote}
+The specification for the compiler has not
+changed, but here they are for reference 
+\begin{eqnarray}
+\Exec  (\Comp  x)\  s &=& \evalf   x:s \label{spec1.3}\\
+\Exec  (\Compp   x\  c)\ s &=& \Exec  c\  (\evalf  x:s) \label{spec2.3}
+\end{eqnarray}
+
+Beginning by applying the 
+specification and evaluation function
+to our new source expression:
 \begin{align*}
-	&\Exec (\Compp  (Lite\ x\ y\ z)\ c)\ s \\
-	=\, & \{specification\ (2) \} \\
-	&\Exec c\ (\evalf  (Lite\ x\ y\ z) : s) \\
-	=\, & \{\mbox{defintion of}\ \evalf \} \\
-	&\Exec c\ (\ifff \evalf  x\ \not= 0\ \tthen \evalf  y\ \eelse \evalf  z : s)
+	&\Exec (\Compp  (\Lite\ x\ y\ z)\ c)\ s \\
+	=\, & \{\mbox{specification of 
+				the compiler} \} \\
+	&\Exec c\ (\evalf  (\Lite x\ y\ z) : s) \\
+	=\, & \{ \mbox{defintion of \eval} \} \\
+	&\Exec c\ (\ifff \evalf  x\ \not= 0\ 
+		\tthen \evalf  y\ \eelse \evalf  z : s)
 \end{align*}
 
 Like with \ite\ our calculation halts here,
-our aim with this time is that, again by using
-the expression $x$ as our condition,
+but our aim with this time, is that 
 rather than deciding upon what value throw away
-we instead decide upon two code branches, $ct$ and $ce$,
-containing code of the complied $y$ and $z$ expressions.
-
-	\[ LITE :: Code \rightarrow Code \rightarrow Code \]
-	\[ \Exec (LITE\ ct\ ce)\ (\evalf  x:s) 
-	= \Exec c\ (\ifff \evalf  x\ \not= 0\ \tthen \evalf  y\ \eelse \evalf  z : s) \]
+we instead decide upon two branches of code, $ct$ and $ce$,
+containing complied code of the $y$ and $z$ expressions.
+\newcommand{\LITE}{\mathit{LITE\ }}
+\newcommand{\LITEt}{\textit{LITE}}
+\begin{eqnarray}
+\LITE &::& \Code \rightarrow \Code \rightarrow \Code \nonumber \\
+\Exec (\LITE ct\ ce)\ (\evalf  x:s) 
+			&=& \Exec c\ (\ifff \evalf  x\ \not= 0\ 
+				\tthen \evalf  y\ \eelse \evalf  z : s) \nonumber \\
+\label{execlite}
+\end{eqnarray}
 
 We cannot use this equation as a definition of exec 
 because $c,\ y$ and $z$ are unbound in the 
 body of the expression\cite[page 10]{bandh}.
 However we can bind them in $ct$ and $ce$.
-The compile function \comp\ requires that any code is followed by
-more code (unless it is a HALT),
-so not only do  $ct$ and $ce$ contain the code for expressions
- $y$ and $z$ but also the continuation code $c$
+But what is contained within each of these
+arguments?
 
+In order to be type correct both $ct$ and $ce$
+must be of type code, code is produced by the 
+compile function which is defined 
+such that any expression is followed by
+continuation code,
+therefore both $ct$ and $ce$ also contain 
+the continuation code $c$ for expressions
+ $y$ and $z$.
 \begin{eqnarray*}
 	ct &=& \Compp  y\ c \\
 	ce &=& \Compp  z\ c
@@ -1176,7 +1206,7 @@ so not only do  $ct$ and $ce$ contain the code for expressions
 
 In summary our generalised formal partial specification is
 \begin{equation*}
-	\Exec (LITE\ (\Compp  y\ c)\ (\Compp  z\ c) )\ (k:s) 
+	\Exec (\LITE (\Compp  y\ c)\ (\Compp  z\ c) )\ (k:s) 
 = \Exec (\ifff k \not= 0\ \tthen \Compp  y\ c\ \eelse \Compp  z\ c)\ s 
 \end{equation*}
 which makes the rest of our calculation straightforward
@@ -1184,23 +1214,31 @@ which makes the rest of our calculation straightforward
 \begin{align*}
 	&\Exec c\ (\ifff \evalf  x\ \not= 0\ \tthen \evalf  y\ \eelse \evalf  z : s) \\
 	=\, & \{\mbox{defintion of}\ exec\} \\
-	&\Exec (LITE\ (\Compp  y\ c)\ (\Compp  z\ c) )\ (\evalf  x : s) \\
-	=\, & \{\mbox{induction hypothesis}\ for\ x\} \\
-	&\Exec (\Compp  x\ ((LITE\ (\Compp  y\ c)\ (\Compp  z\ c)))\ s
+	&\Exec (\LITE (\Compp  y\ c)\ (\Compp  z\ c) )\ (\evalf  x : s) \\
+	=\, & \{\mbox{induction hypothesis for}\ x\} \\
+	&\Exec (\Compp  x\ ((\LITE (\Compp  y\ c)\ (\Compp  z\ c)))\ s
 \end{align*}
 
 From which we may deduce 
-
-	\[ \Compp  (Lite\ x\ y\ z)\ c 
+\[ \Compp  (Lite\ x\ y\ z)\ c 
 		= \Compp  x\ (LITE\ (\Compp  y\ c)\ (\Compp  z\ c)) \]
-
+		
+\noindent that is compiling a \lite\ 
+means compiling the condition expression $x$
+followed by the \LITEt constructor and two
+branches of code each containing the same
+continuation code.
 This method poses a problem;
-on the right hand side of this equation,
-$c$ appears twice, meaning the code not only 
-doubles in length, but doubles in \emph{compile time}.
-This would cause a compile time-complexity of
-\( T(n) = \mathcal{O}(2^n) \)
-where $n$ is the number of \lite\ expressions.
+it makes double use of the continuation code,
+this not only doubles in length of the fully compiled code,
+but doubles in \emph{compile time}.
+This causes an exponential
+ compile time complexity 
+\( \mathcal{O}(2^n) \)
+and equally space complexity
+\( \mathcal{O}(2^n) \)
+where $n$ is the number of \lite\ expressions 
+in the source code.
 Surely there must be a way to avoid this.
 
 The problem comes from the double use of $c$,
@@ -1215,72 +1253,80 @@ to be compiled without continuation code of it's own,
 unlike \compp, also LITE would need 3 code arguments in
 it's constructor and we would need a way of 
 reuniting the condition's code back with the rest of the code $c$
-as~$``:\ cons''$ would not work.
+as~$``:\ cons''$ would not work,
 
 \begin{eqnarray*}
-f\ (Lite\ x\ y\ z)\ c &=& f'\ x\ (LITE\ (f\ y)\ (f\ z)\ c) \\
-\Exec (LITE\ (f\ y)\ (f\ z)\ c) (k : s) 
+f\ (\Lite\ x\ y\ z)\ c &=& f'\ x\ (\LITE\ (f\ y)\ (f\ z)\ c) \\
+\Exec (\LITE\ (f\ y)\ (f\ z)\ c) (k : s) 
 &=& \Exec ((if \not=0\ \tthen (f\ y)\ \eelse (f\ z)) : c)\ s 
 \end{eqnarray*}
 
-But this is an optimisation problem out of the scope of this dissertation.
+\noindent but this is an optimisation problem 
+out of the scope of this dissertation.
 
 In summary, we have discovered the following 
 definitions for the compiler and \vm.
 
 \begin{eqnarray}
-&\Compp  (Lite\ x\ y\ z)\ c \nonumber \\
-	&= \Compp  x\ (LITE\ (\Compp  y\ c)\ (\Compp  z\ c)) \label{complite} \\
-&\Exec (LITE\ ct\ ce)\ (\evalf  x:s) \nonumber \\
-	&= \Exec c\ (\ifff \evalf  x\ \not= 0\ \tthen \evalf  y\ \eelse \evalf  z : s) \label{execlite}
+\Compp  (\Lite x\ y\ z)\ c 
+	&=& \Compp  x\ (\LITE (\Compp  y\ c)\ (\Compp  z\ c)) \label{complite} \\
+\Exec (\LITE ct\ ce)\ (\evalf  x:s) 
+	&=& \Exec c\ (\ifff \evalf  x\ \not= 0\ \tthen \evalf  y\ \eelse \evalf  z : s) \nonumber \\
+	& \label{execlite}
 \end{eqnarray}
 
 \subsubsection{Testing}
 
-To test our definitions we can use the Haskell compiler
-to compile and execute an example \lite expression,
-which will be the same expression as we used
-on it's the eager twin for comparison.
+This series of tests looks to not only
+validate the functionality of these
+definitions, but also determine
+if the argument expressions are actually lazily evaluated
+and produce more efficient code than with the eager
+\ite\ function.
 
-\[ \Exec (\Comp (Lite\ (\Val 1)\
+A fair test would be to apply \lite\ to 
+the same arguments as \ite\ was applied to 
+in \S\ref{itetests}. 
+Our test expression $\delta$ is
+\[ \delta = Lite\ (\Val 1)\
 		 (\Add (\Val 2)\ (\Val 3))\ 
-		(\Add (\Val 4)\ (\Val 5)))))\ [\, ] \]
+		(\Add (\Val 4)\ (\Val 5)) \]
 
 \subsubsection{Compilation}
 
-Compiling by hand:
+Applying compile functions to $\delta$ should
+yield code that is significantly longer as
+discussed previously:
 \begin{align*}	
-&\Comp (Lite\ (\Val 1)\ (\Add (\Val 2)\ (\Val 3))\ (\Add (\Val 4) (\Val 5))) \\
-=\, & \{ \mbox{defintion of}\ \Comp followed\ by\ equation\ \ref{complite}\ \} \\
-&\Compp  (\Val 1) (LITE\ (\Compp  (\Add (\Val 2)\ (\Val 3))\ HALT)\ (\Compp   (\Add (\Val 4)\ (\Val 5)))) \\
-=\, & \{ equation\ \ref{compval}, \ref{compadd} \} \\
-&\PUSH 1\ (LITE\ (\Compp  (\Add (\Val 2)\ (\Val 3))\ HALT)\ (\Compp  (\Add (\Val 4)\ (\Val 5)))) \\
-=\, & \{ equation\ 8\ twice \} \\
-&\PUSH 1\ (LITE\ (\Compp  (\Val 2)\ (\Compp  (\Val 3)\ (\ADD  HALT))\ (\Compp   (\Val 4)\ (\Compp  (\Val 5)\ (\ADD  HALT)))) \\
-=\, & \{ equation\ 9\ four\ times \} \\
-&\PUSH 1\ (LITE\ (\PUSH 2\ (\PUSH 3\ (\ADD  HALT))) (\PUSH 4\ (\PUSH 5 (\ADD  HALT))))
+&\Comp (Lite\ (\Val 1)\ (\Add (\Val 2)\ (\Val 3))\ 
+						(\Add (\Val 4) (\Val 5))) \\
+=\, & \{ \mbox{defintion of \comp\ $e$} \} \\
+&\Compp (Lite\ (\Val 1)\ (\Add (\Val 2)\ (\Val 3))\ 
+						(\Add (\Val 4) (\Val 5)))\ \HALT \\
+=\, & \{ \mbox{defintion of \compp\ \lite} \} \\
+&\Compp  (\Val 1) (LITE\ (\Compp (\Add (\Val 2)\ (\Val 3))\ \HALT)\\ 
+							&(\Compp (\Add (\Val 4)\ (\Val 5))\ \HALT)) \\
+=\, & \{ \mbox{definition of \compp\ \val\ and \compp\ \add\ twice}\} \\
+&\PUSH 1\ (LITE\ (\Compp  (\Val 2)\ (\Compp  (\Val 3)\ (\ADD  HALT)) \\
+				&(\Compp   (\Val 4)\ (\Compp  (\Val 5)\ (\ADD  HALT)))) \\
+=\, & \{ \mbox{definition of \compp\ \val\ four times} \} \\
+&\PUSH 1\ (LITE\ (\PUSH 2\ (\PUSH 3\ (\ADD  HALT))) \\
+			&(\PUSH 4\ (\PUSH 5 (\ADD  HALT))))
 \end{align*}
 
-Using the compile function \\Comp on this expression 
-in the Haskell implementation yields the same result:
-
-\begin{align*}	
+Using the Haskell implementation 
+of the compile function on $\delta$
+yields the same result: \( \Comp \delta = \)
+\begin{align*}
 &\Comp (Lite\ (\Val 1)\
 		 (\Add (\Val 2)\ (\Val 3))\ 
 		(\Add (\Val 4)\ (\Val 5)))) \\
-&= \PUSH 1\ (LITE\ 
-		(\PUSH 2\ (\PUSH 3\ 
-		(\ADD  HALT))) 
-		(\PUSH 4\ (\PUSH 5 (\ADD  HALT))))
+=\, & \{ \mbox{Haskell implementation of \comp\ and \compp} \} \\
+&\PUSH 1\ (LITE\ (\PUSH 2\ (\PUSH 3\ (\ADD  HALT))) \\
+		&(\PUSH 4\ (\PUSH 5 (\ADD  HALT))))
 \end{align*}
 
 \subsubsection{Execution}
-
-%\begin{eqnarray}
-%	\Exec  (LITE\ ct\ ce)\ (k:s) &=&  exec (\ifff k\ \not= 0\ \tthen ct\ \eelse ce)\ s \\
-%	\Exec (\PUSH n\ c) s         &=&  \Exec c\ (n:s) \\
-%	\Exec  (\ADD  c)\ s     &=&  \Exec c\ ((n+m) : s) 
-%\end{eqnarray}
 
 \begin{align*}
 &\Exec (\PUSH 1\ (LITE\ (\PUSH 2\ (\PUSH 3\ (\ADD  HALT))) (\PUSH 4\ (\PUSH 5 (\ADD  HALT)))))\ [\, ] \\
@@ -1351,17 +1397,17 @@ In conclusion we have calculated the following definitions
 												\cite[page 11]{bandh}:
 
 \begin{eqnarray*}
-	\textbf{data}\ Code &=& ...ITE\ Code | LITE\ Code\ Code \\
-	comp 				  &::& Expr \rightarrow Code \\
-	\Comp x			  &=& \Compp  x\ HALT \\
-	comp'				  &::& Expr \rightarrow Code \rightarrow Code \\
+	\textbf{data}\ \Code &=& ...\ITE \Code | \LITE \Code \Code \\
+	\Comp 				  &::& \Expr \rightarrow \Code \\
+	\Comp x			  &=& \Compp  x\ \HALT \\
+	\Compp				  &::& \Expr \rightarrow \Code \rightarrow \Code \\
 	\Compp  (\Ite x\ y\ z) 
-				&=& \Compp  z\ (\Compp  y\ (\Compp  x\ (ITE c))) \\
-	\Compp  (Lite\ x\ y\ z) 
-				&=& \Compp  x\ (LITE\ (\Compp  y\ c)\ (\Compp  z\ c)) \\
-	\Exec (ITE\ c)\ (k:m:n:s) 
+				&=& \Compp  z\ (\Compp  y\ (\Compp  x\ (\ITE c))) \\
+	\Compp  (\Lite x\ y\ z) 
+				&=& \Compp  x\ (\LITE (\Compp  y\ c)\ (\Compp  z\ c)) \\
+	\Exec (\ITE c)\ (k:m:n:s) 
 						&=& \Exec c\ ((\ifff k \not=0\ \tthen m\ \eelse n):s) \\
-	\Exec (LITE\ ct\ ce)\ (k:s) 
+	\Exec (\LITE ct\ ce)\ (k:s) 
 						&=& \Exec (\ifff k \not=0\ \tthen ct\ \eelse ce)\ s
 \end{eqnarray*}
 
@@ -1403,6 +1449,11 @@ expressions and interprets them.
 \eval\ would require atleast one more argument
 containing a set of bindings which it can
 manipulate.
+
+\newcommand{\Context}{\mathit{Context\ }}
+\newcommand{\Cxt}{\mathit{Cxt\ }}
+\newcommand{\Contextt}{\textit{Context\ }}
+\newcommand{\Cxtt}{\textit{Cxt\ }}
 
 \subsection{Semantics}
 
@@ -1549,7 +1600,7 @@ Breaking down what the interpreter
 does can indicate what the 
 compiler and \vm\ should do.
 
-\[eval(Let\ v\ x\ y)\ bs 
+\[\evalf (Let\ v\ x\ y)\ bs 
 		= \evalf  y\ ((v,\ \evalf  x\ bs):bs) \]
 
 NB: bs, although a new type it is just a list
@@ -1574,13 +1625,13 @@ parts of each pair,
 it can however, 
 store what variables are called and in what order.
 The structure that will do this, will be a 
-stack of strings called a ``Context'' or ``Cxt''.
+stack of strings called a ``\Contextt'' or ``\Cxtt''.
 
 \begin{eqnarray*}
-	&\textbf{type}\  Context\ &= [String] \\
-	&comp &::\ Expr \rightarrow Code \\
-	&\Comp e &=\ \Compp  e\ [\,]\ \HALT (*)\\
-	&comp' &::\ Expr \rightarrow Cxt \rightarrow Code
+	\textbf{type}\  \Context &=& [\mathit{String}] \\
+	\Comp &::& \Expr \rightarrow \Code \\
+	\Comp e &=& \Compp  e\ [\,]\ \HALT (*)\\
+	\Compp &::& \Expr \rightarrow \Cxt \rightarrow \Code
 \end{eqnarray*}
 
 *\comp\ stays much the same except it's cxt
@@ -1598,7 +1649,7 @@ for the \vm, we'd have
 &\Exec (\Comp x)\ s  
 	&= \Exec (\Compp  x\ [\,]\ c)\ s  \\
 &exec\ (\Compp  x\ cxt\ c)\ s  
-	&= exec\ c\ (\evalf  x\ bs :bs):s)
+	&= exec\ c\ ((\evalf  x\ bs) : bs) : s
 \end{eqnarray*}
 
 Which cannot be used

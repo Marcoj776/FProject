@@ -29,14 +29,14 @@ R.~Hunter, \emph{COMPILERS: Their Design and Construction Using Pascal}.\hskip
 E.~Meijer, ``Calculating compilers,'' Ph.D. dissertation, Katholieke
   Universiteit Nijmegen, 1992.
 
-\bibitem{bandh}
-P.~Bahr and G.~Hutton, ``Calculating correct compilers,'' \emph{Journal of
-  Functional Programming}, 2015.
-
 \bibitem{backhouse}
 R.~C. Backhouse, \emph{Program Construction: Calculating Implementations from
   Specificiations}.\hskip 1em plus 0.5em minus 0.4em\relax John Wiley and Sons,
   Inc, 2003.
+
+\bibitem{bandh}
+P.~Bahr and G.~Hutton, ``Calculating correct compilers,'' \emph{Journal of
+  Functional Programming}, 2015.
 
 \bibitem{dragon}
 A.~V. Aho, R.~Sethi, and J.~D. Ullman, \emph{Compilers: Principles, Techniques,
