@@ -80,7 +80,7 @@ exec (VAR n c)  ( s, vs)       =   exec c (((vs!!n):s), vs) -- put value of n on
 
 ----TESTS-----
 
---Enforces correctness of induction hypithesis
+--Enforces correctness of induction hypithesis for a Let expression
 calc :: String -> Expr -> Expr -> Context -> Code -> Memory -> [Memory]
 calc v x y cxt c (s,vs) =
   [
