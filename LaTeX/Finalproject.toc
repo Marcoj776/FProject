@@ -1,36 +1,42 @@
-\contentsline {section}{\numberline {1}Introduction}{2}
-\contentsline {subsection}{\numberline {1.1}Aims and methodology}{3}
-\contentsline {subsection}{\numberline {1.2}Roadmap}{4}
-\contentsline {section}{\numberline {2}A review of the Bahr and Hutton method}{5}
-\contentsline {subsection}{\numberline {2.1}Values and addition}{5}
-\contentsline {subsection}{\numberline {2.2}Calculations}{6}
-\contentsline {subsubsection}{\numberline {2.2.1}Values}{7}
-\contentsline {subsubsection}{\numberline {2.2.2}Addition}{8}
-\contentsline {subsection}{\numberline {2.3}Testing}{10}
-\contentsline {subsubsection}{\numberline {2.3.1}Compilation}{10}
-\contentsline {subsubsection}{\numberline {2.3.2}Execution}{11}
-\contentsline {subsubsection}{\numberline {2.3.3}Interpretation}{12}
-\contentsline {subsection}{\numberline {2.4}Summary}{12}
-\contentsline {section}{\numberline {3}Conditionals, $L_c$}{14}
-\contentsline {subsection}{\numberline {3.1}Calculation}{15}
-\contentsline {subsection}{\numberline {3.2}Testing}{16}
-\contentsline {subsubsection}{\numberline {3.2.1}Compilation}{17}
-\contentsline {subsubsection}{\numberline {3.2.2}Execution}{18}
-\contentsline {subsubsection}{\numberline {3.2.3}Interpretation}{19}
-\contentsline {subsection}{\numberline {3.3}Summary}{19}
-\contentsline {subsection}{\numberline {3.4}Lazy evaluation}{21}
-\contentsline {subsubsection}{\numberline {3.4.1}Calculation}{21}
-\contentsline {subsubsection}{\numberline {3.4.2}Testing}{23}
-\contentsline {subsubsection}{\numberline {3.4.3}Compilation}{23}
-\contentsline {subsubsection}{\numberline {3.4.4}Execution}{24}
-\contentsline {subsubsection}{\numberline {3.4.5}Interpretation}{24}
-\contentsline {subsubsection}{\numberline {3.4.6}Proof}{24}
-\contentsline {subsection}{\numberline {3.5}Summary}{25}
-\contentsline {section}{\numberline {4}Bindings, $L_b$}{26}
-\contentsline {subsection}{\numberline {4.1}Semantics}{26}
-\contentsline {subsection}{\numberline {4.2}Compiler Correctness}{27}
-\contentsline {subsection}{\numberline {4.3}Calculation}{29}
-\contentsline {subsection}{\numberline {4.4}Testing}{31}
-\contentsline {section}{\numberline {5}Function definition, $L_f$}{32}
-\contentsline {section}{\numberline {6}Automated testing and calculation checking}{33}
-\contentsline {section}{\numberline {7}Conclusion}{34}
+\contentsline {section}{\numberline {1}Introduction}{3}
+\contentsline {subsection}{\numberline {1.1}Aims and methodology}{4}
+\contentsline {subsection}{\numberline {1.2}Roadmap}{5}
+\contentsline {section}{\numberline {2}A review of the Bahr and Hutton method}{6}
+\contentsline {subsection}{\numberline {2.1}Values and addition}{6}
+\contentsline {subsection}{\numberline {2.2}Calculations}{7}
+\contentsline {subsubsection}{\numberline {2.2.1}Values}{8}
+\contentsline {subsubsection}{\numberline {2.2.2}Addition}{9}
+\contentsline {subsection}{\numberline {2.3}Testing}{11}
+\contentsline {subsubsection}{\numberline {2.3.1}Compilation}{11}
+\contentsline {subsubsection}{\numberline {2.3.2}Execution}{12}
+\contentsline {subsubsection}{\numberline {2.3.3}Interpretation}{13}
+\contentsline {subsection}{\numberline {2.4}Summary}{13}
+\contentsline {section}{\numberline {3}Conditionals, $L_c$}{15}
+\contentsline {subsection}{\numberline {3.1}Calculation}{16}
+\contentsline {subsection}{\numberline {3.2}Testing}{17}
+\contentsline {subsubsection}{\numberline {3.2.1}Compilation}{18}
+\contentsline {subsubsection}{\numberline {3.2.2}Execution}{19}
+\contentsline {subsubsection}{\numberline {3.2.3}Interpretation}{20}
+\contentsline {subsection}{\numberline {3.3}Summary}{20}
+\contentsline {subsection}{\numberline {3.4}Lazy evaluation}{22}
+\contentsline {subsubsection}{\numberline {3.4.1}Calculation}{22}
+\contentsline {subsubsection}{\numberline {3.4.2}Testing}{24}
+\contentsline {subsubsection}{\numberline {3.4.3}Compilation}{24}
+\contentsline {subsubsection}{\numberline {3.4.4}Execution}{25}
+\contentsline {subsubsection}{\numberline {3.4.5}Interpretation}{25}
+\contentsline {subsection}{\numberline {3.5}Summary}{26}
+\contentsline {section}{\numberline {4}Bindings, $L_b$}{28}
+\contentsline {subsection}{\numberline {4.1}Semantics}{28}
+\contentsline {subsection}{\numberline {4.2}Compiler Correctness}{29}
+\contentsline {subsection}{\numberline {4.3}Calculation}{31}
+\contentsline {subsection}{\numberline {4.4}Testing}{33}
+\contentsline {subsubsection}{\numberline {4.4.1}Compilation}{34}
+\contentsline {subsection}{\numberline {4.5}Summary}{34}
+\contentsline {section}{\numberline {5}Function definition, $L_f$}{36}
+\contentsline {section}{\numberline {6}Automated testing and calculation checking}{38}
+\contentsline {subsection}{\numberline {6.1}Addition}{38}
+\contentsline {subsection}{\numberline {6.2}Conditionals, $L_c$}{39}
+\contentsline {subsection}{\numberline {6.3}Lazy conditionals, $L_c$}{39}
+\contentsline {subsection}{\numberline {6.4}Variable bindings, $L_b$}{39}
+\contentsline {subsection}{\numberline {6.5}Lazysmallcheck}{40}
+\contentsline {section}{\numberline {7}Conclusion}{42}

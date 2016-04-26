@@ -48,6 +48,43 @@ lite6 =  eval (Ite (Val 0) (Add(Val 2)(Val 3)) (Add(Val 4)(Val 5)))
 
 
 
+	step1 :: Expr -> Expr -> Expr -> Code -> Stack -> (Stack, Stack)
+	step1 x y z c s = 
+	  ( exec (comp' (Lite x y z) c) s,
+		exec c (eval (Lite x y z) : s) )
+	  
+	step2 :: Expr -> Expr -> Expr -> Code -> Stack -> (Stack, Stack)
+	step2 x y z c s = 
+	  ( exec c (eval (Lite x y z) : s),
+		exec c ((if eval x /= 0 then eval y else eval z) : s) )
+
+	step3 :: Expr -> Expr -> Expr -> Code -> Stack -> (Stack, Stack)
+	step3 x y z c s = 
+	  ( exec c ((if eval x /= 0 then eval y else eval z) : s),
+		exec (LITE c) (eval x : eval y : eval z : s) )
+
+	step4 :: Expr -> Expr -> Expr -> Code -> Stack -> (Stack, Stack)
+	step4 x y z c s = 
+	  ( exec (LITE c) (eval x : eval y : eval z : s),
+		exec (comp' x (LITE c)) (eval y : eval z : s) )
+
+	step5 :: Expr -> Expr -> Expr -> Code -> Stack -> (Stack, Stack)
+	step5 x y z c s = 
+	  ( exec (comp' x (LITE c)) (eval y : eval z : s),
+		exec (comp' y (comp' x (LITE c))) (eval z : s) )
+
+	step6 :: Expr -> Expr -> Expr -> Code -> Stack -> (Stack, Stack)
+	step6 x y z c s = 
+	  ( exec (comp' y (comp' x (LITE c))) (eval z : s),
+		exec (comp' z (comp' y (comp' x (LITE c)))) s )
+
+	one   = step1 (Val 1) (Val 2) (Val 3) HALT []
+	two   = step2 (Val 1) (Val 2) (Val 3) HALT []
+	three = step3 (Val 1) (Val 2) (Val 3) HALT []
+	four  = step4 (Val 1) (Val 2) (Val 3) HALT []
+	five  = step5 (Val 1) (Val 2) (Val 3) HALT []
+	six   = step6 (Val 1) (Val 2) (Val 3) HALT []
+
 
 
 

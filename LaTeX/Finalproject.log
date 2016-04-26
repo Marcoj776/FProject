@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.3.29)  25 APR 2016 01:56
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.3.29)  26 APR 2016 06:25
 entering extended mode
 **Finalproject.tex
 (Finalproject.tex
@@ -83,6 +83,38 @@ LaTeX Info: Redefining \] on input line 2666.
 Package: theoremref 2013/05/22 References with automatic theorem names
 \thmref@num=\count99
 )
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\graphicx.sty"
+Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\keyval.sty"
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks19
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\graphics.sty"
+Package: graphics 2014/10/28 v1.0p Standard LaTeX Graphics (DPC,SPQR)
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\trig.sty"
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\00miktex\graphics.cfg"
+File: graphics.cfg 2007/01/18 v1.5 graphics configuration of teTeX/TeXLive
+)
+Package graphics Info: Driver file: pdftex.def on input line 91.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\pdftex-def\pdftex.def"
+File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\infwarerr.sty"
+Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ltxcmds.sty"
+Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
+)
+\Gread@gobject=\count100
+))
+\Gin@req@height=\dimen112
+\Gin@req@width=\dimen113
+)
 (Finalproject.aux
 
 LaTeX Warning: Label `compval' multiply defined.
@@ -90,73 +122,68 @@ LaTeX Warning: Label `compval' multiply defined.
 
 LaTeX Warning: Label `execpush' multiply defined.
 
-
-LaTeX Warning: Label `execlite' multiply defined.
-
 )
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
- [1
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+ ("C:\Program Files\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count101
+\scratchdimen=\dimen114
+\scratchbox=\box28
+\nofMPsegments=\count102
+\nofMParguments=\count103
+\everyMPshowfont=\toks20
+\MPscratchCnt=\count104
+\MPscratchDim=\dimen115
+\MPnumerator=\count105
+\makeMPintoPDFobject=\count106
+\everyMPtoPDFconversion=\toks21
+) [1
 
-{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}] (Finalproject.toc)
+{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}] (Finalproject.toc
+[1])
 \tf@toc=\write3
-
-[1] [2
+ [2] [3
 
 ]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 175.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 208.
 
  ("C:\Program Files\MiKTeX 2.9\tex\latex\base\omscmr.fd"
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 175.
- [3] [4]
-[5] [6] [7] [8]
-Overfull \hbox (60.40189pt too wide) in paragraph at lines 535--539
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 208.
+ [4]
+[5] [6] [7] [8] [9]
+Overfull \hbox (60.40189pt too wide) in paragraph at lines 568--572
 []\OT1/cmr/m/n/10 The fi-nal ex-pres-sion is now in the form $[]\OML/cmm/m/it/1
 0 c[] s$\OT1/cmr/m/n/10 , we started from $[]([]([]\OML/cmm/m/it/10 x y\OT1/cmr
 /m/n/10 ) \OML/cmm/m/it/10 c\OT1/cmr/m/n/10 ) \OML/cmm/m/it/10 s$
  []
 
-[9] [10] [11] [12] [13] [14] [15]
-Overfull \hbox (28.38431pt too wide) in paragraph at lines 975--975
-[] 
- []
-
-[16]
-Overfull \hbox (28.38431pt too wide) in paragraph at lines 989--989
+[10] [11] [12] [13] [14] [15] [16] [17] [18] [19]
+Overfull \hbox (30.04793pt too wide) in paragraph at lines 1122--1122
 [] 
  []
 
 
-Overfull \hbox (82.29381pt too wide) in paragraph at lines 1015--1015
-[] 
- []
-
-[17] [18]
-Overfull \hbox (0.77838pt too wide) in paragraph at lines 1065--1070
+Overfull \hbox (0.77838pt too wide) in paragraph at lines 1134--1139
 []\OT1/cmr/m/n/10 The tests by hand and with the im-ple-mented eval-u-a-tion fu
 nc-tion have passed,
  []
 
-[19] [20]
-Overfull \hbox (24.97726pt too wide) in alignment at lines 1179--1185
- [][][] []
- []
-
-[21]
-Overfull \hbox (55.8808pt too wide) detected at line 1211
+[20] [21] [22]
+Overfull \hbox (55.8808pt too wide) detected at line 1293
 []\OT1/cmr/m/n/10 ([]([]\OML/cmm/m/it/10 y c\OT1/cmr/m/n/10 ) ([]\OML/cmm/m/it/
 10 z c\OT1/cmr/m/n/10 )) (\OML/cmm/m/it/10 k \OT1/cmr/m/n/10 : \OML/cmm/m/it/10
  s\OT1/cmr/m/n/10 ) = []([]\OML/cmm/m/it/10 k \OMS/cmsy/m/n/10 6\OT1/cmr/m/n/10
@@ -164,53 +191,122 @@ Overfull \hbox (55.8808pt too wide) detected at line 1211
  []
 
 
-Overfull \hbox (5.83434pt too wide) in alignment at lines 1258--1262
+Overfull \hbox (5.83434pt too wide) in alignment at lines 1340--1344
  [][][] []
- []
-
-
-Overfull \hbox (24.97726pt too wide) in alignment at lines 1270--1276
- [][][] []
- []
-
-[22]
-Overfull \hbox (104.05373pt too wide) in paragraph at lines 1343--1343
-[] 
  []
 
 [23]
-Overfull \hbox (84.05377pt too wide) in paragraph at lines 1351--1351
+Overfull \hbox (100.44356pt too wide) in paragraph at lines 1415--1415
 [] 
  []
 
-[24] [25] [26]
-Underfull \hbox (badness 10000) in paragraph at lines 1525--1536
-
- []
-
-
-Overfull \hbox (31.9201pt too wide) in paragraph at lines 1562--1562
+[24]
+Overfull \hbox (89.88803pt too wide) in paragraph at lines 1426--1426
 [] 
  []
 
-[27] [28] [29]
-Overfull \hbox (41.07405pt too wide) in alignment at lines 1752--1760
+
+Overfull \hbox (9.55333pt too wide) in alignment at lines 1436--1443
  [][][] []
  []
 
-[30] [31] [32] [33] (Finalproject.bbl) [34] (Finalproject.aux)
+[25]
+Overfull \hbox (0.77838pt too wide) in paragraph at lines 1497--1502
+[]\OT1/cmr/m/n/10 The tests by hand and with the im-ple-mented eval-u-a-tion fu
+nc-tion have passed,
+ []
+
+[26] [27] [28]
+Underfull \hbox (badness 10000) in paragraph at lines 1651--1662
+
+ []
+
+
+Overfull \hbox (31.9201pt too wide) in paragraph at lines 1688--1688
+[] 
+ []
+
+[29] [30] [31]
+Overfull \hbox (40.92973pt too wide) in alignment at lines 1878--1886
+ [][][] []
+ []
+
+[32]
+Overfull \hbox (22.25226pt too wide) in paragraph at lines 1996--1996
+[] 
+ []
+
+[33]
+Overfull \hbox (28.43843pt too wide) in alignment at lines 2016--2044
+ [][][] []
+ []
+
+[34] [35] [36] [37] <images/Addsteps.png, id=137, 354.123pt x 299.31825pt>
+File: images/Addsteps.png Graphic file (type png)
+
+<use images/Addsteps.png>
+Package pdftex.def Info: images/Addsteps.png used on input line 2207.
+(pdftex.def)             Requested size: 283.29877pt x 239.45493pt.
+ [38 <./images/Addsteps.png>]
+Overfull \hbox (33.82118pt too wide) in paragraph at lines 2228--2233
+[]\OT1/cmr/m/n/10 In later sub-sec-tions this ar-ray of ar-rows will be short-e
+ned to $[] \OMS/cmsy/m/n/10 !$
+ []
+
+<images/Itesteps.png, id=143, 405.9165pt x 440.24475pt>
+File: images/Itesteps.png Graphic file (type png)
+
+<use images/Itesteps.png>
+Package pdftex.def Info: images/Itesteps.png used on input line 2239.
+(pdftex.def)             Requested size: 324.73364pt x 352.19629pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<images/Litesteps.png, id=144, 401.0985pt x 439.6425pt>
+File: images/Litesteps.png Graphic file (type png)
+
+<use images/Litesteps.png>
+Package pdftex.def Info: images/Litesteps.png used on input line 2265.
+(pdftex.def)             Requested size: 320.87923pt x 351.71446pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<images/Letsteps.png, id=145, 401.70074pt x 531.1845pt>
+File: images/Letsteps.png Graphic file (type png)
+
+<use images/Letsteps.png>
+Package pdftex.def Info: images/Letsteps.png used on input line 2300.
+(pdftex.def)             Requested size: 321.36102pt x 424.94817pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[39] <images/ghctest.png, id=149, 292.6935pt x 75.28125pt>
+File: images/ghctest.png Graphic file (type png)
+
+<use images/ghctest.png>
+Package pdftex.def Info: images/ghctest.png used on input line 2344.
+(pdftex.def)             Requested size: 234.1551pt x 60.22507pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[40 <./images/Itesteps.png>] [41 <./images/Litesteps.png>] (Finalproject.bbl)
+[42] [43 <./images/Letsteps.png> <./images/ghctest.png>] (Finalproject.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 1020 strings out of 493698
- 11245 string characters out of 3144412
- 73665 words of memory out of 3000000
- 4383 multiletter control sequences out of 15000+200000
- 12573 words of font info for 44 fonts, out of 3000000 for 9000
+ 1967 strings out of 493698
+ 24033 string characters out of 3144412
+ 91339 words of memory out of 3000000
+ 5290 multiletter control sequences out of 15000+200000
+ 13541 words of font info for 47 fonts, out of 3000000 for 9000
  1025 hyphenation exceptions out of 8191
- 27i,9n,20p,231b,195s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 27i,9n,20p,250b,222s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Pr
 ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Fi
 les/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKT
@@ -225,9 +321,9 @@ s/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX 2
 .9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts
 /type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pu
 blic/amsfonts/cm/cmti10.pfb>
-Output written on Finalproject.pdf (35 pages, 272791 bytes).
+Output written on Finalproject.pdf (44 pages, 409682 bytes).
 PDF statistics:
- 174 PDF objects out of 1000 (max. 8388607)
+ 216 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 26 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -38,7 +38,30 @@ execadd = exec (comp(Add (Add (Val 0) (Val 1)) (Val 2))) []
 
 evaladd = eval (Add (Add (Val 0) (Val 1)) (Val 2))
 
+	step1 :: Expr -> Expr  -> Code -> Stack -> (Stack, Stack)
+	step1 x y c s = 
+	  ( exec (comp' (Add x y) c) s,
+		exec c (eval (Add x y) :s) )
+	  
+	step2 :: Expr -> Expr  -> Code -> Stack -> (Stack, Stack)
+	step2 x y c s = 
+	  ( exec c (eval (Add x y) :s),
+		exec c ((eval x + eval y) :s) )  
 
+	step3 :: Expr -> Expr  -> Code -> Stack -> (Stack, Stack)
+	step3 x y c s = 
+	  ( exec c ((eval x + eval y) :s),
+		exec (ADD c) (eval y : eval x : s) )
+		
+	step4 :: Expr -> Expr  -> Code -> Stack -> (Stack, Stack)
+	step4 x y c s = 
+	  ( exec (ADD c) (eval y : eval x : s),
+		exec (comp' y (comp' x (ADD c))) s )
+
+	one = step1 (Val 1) (Val 2) HALT []
+	two = step2 (Val 1) (Val 2) HALT []
+	three = step3 (Val 1) (Val 2) HALT []
+	four = step4 (Val 1) (Val 2) HALT []
 
 
 
