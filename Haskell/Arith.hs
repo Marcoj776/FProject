@@ -131,8 +131,8 @@ six     = step6 "x" (Val 2) (Val 3) [] HALT ([],[])
 seven   = step7 "x" (Val 2) (Val 3) [] HALT ([],[])
 -}
 
-let1 = comp (Let "a" (Val 1) (Var a))
-{-
+-- let1 = comp (Let "a" (Val 1) (Var a))
+
 lite2 = exec(comp (Lite (Val 1) (Add (Val 2)(Val 3)) (Add (Val 4)(Val 5)))) []
 lite3 =  eval (Ite (Val 1) (Add(Val 2)(Val 3)) (Add(Val 4)(Val 5)))
 
@@ -140,7 +140,7 @@ lite4 = comp (Lite (Val 0) (Add (Val 2)(Val 3)) (Add (Val 4)(Val 5)))
 lite5 = exec(comp (Lite (Val 0) (Add (Val 2)(Val 3)) (Add (Val 4)(Val 5)))) []
 
 lite6 =  eval (Ite (Val 0) (Add(Val 2)(Val 3)) (Add(Val 4)(Val 5)))
--}
+
 
 
 
